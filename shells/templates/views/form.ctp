@@ -23,28 +23,26 @@
  */
 ?>
 <div class="<?php echo $pluralVar;?> form">
-<?php echo "<?php echo \$form->create('{$modelClass}');?>\n";?>
-	<fieldset>
- 		<legend><?php echo "<?php __('".Inflector::humanize($action)." {$singularHumanName}');?>";?></legend>
 <?php
-		echo "\t<?php\n";
-		foreach ($fields as $field) {
-			if ($action == 'add' && $field == $primaryKey) {
-				continue;
-			} elseif (!in_array($field, array('created', 'modified', 'updated'))) {
-				echo "\t\techo \$form->input('{$field}');\n";
-			}
-		}
-		if (!empty($associations['hasAndBelongsToMany'])) {
-			foreach ($associations['hasAndBelongsToMany'] as $assocName => $assocData) {
-				echo "\t\techo \$form->input('{$assocName}');\n";
-			}
-		}
-		echo "\t?>\n";
-?>
-	</fieldset>
-<?php
-	echo "<?php echo \$form->end('Submit');?>\n";
+echo "\t<?php\n";
+echo "\techo \$form->create('{$modelClass}');\n";
+echo "\techo \$form->inputs(array(\n";
+echo "\t\t'legend' => __('".Inflector::humanize($action)." {$singularHumanName}', true),\n";
+foreach ($fields as $field) {
+	if ($action == 'add' && $field == $primaryKey) {
+		continue;
+	} elseif (!in_array($field, array('created', 'modified', 'updated'))) {
+		echo "\t\t'{$field}',\n";
+	}
+}
+if (!empty($associations['hasAndBelongsToMany'])) {
+	foreach ($associations['hasAndBelongsToMany'] as $assocName => $assocData) {
+		echo "\t\t'{$assocName}',\n";
+	}
+}
+echo "\t));\n";
+echo "\techo \$form->end('Submit');\n";
+echo "\t?>\n";
 ?>
 </div>
 <div class="actions">
