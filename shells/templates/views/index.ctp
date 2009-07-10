@@ -31,47 +31,41 @@ echo \$paginator->counter(array(
 ));
 ?>";?>
 </p>
-<table cellpadding="0" cellspacing="0">
-<tr>
-<?php  foreach ($fields as $field):?>
-	<th><?php echo "<?php echo \$paginator->sort('{$field}');?>";?></th>
-<?php endforeach;?>
-	<th class="actions"><?php echo "<?php __('Actions');?>";?></th>
-</tr>
+<table>
 <?php
-echo "<?php
-\$i = 0;
-foreach (\${$pluralVar} as \${$singularVar}):
-	\$class = null;
-	if (\$i++ % 2 == 0) {
-		\$class = ' class=\"altrow\"';
-	}
-?>\n";
-	echo "\t<tr<?php echo \$class;?>>\n";
-		foreach ($fields as $field) {
-			$isKey = false;
-			if (!empty($associations['belongsTo'])) {
-				foreach ($associations['belongsTo'] as $alias => $details) {
-					if ($field === $details['foreignKey']) {
-						$isKey = true;
-						echo "\t\t<td>\n\t\t\t<?php echo \$html->link(\${$singularVar}['{$alias}']['{$details['displayField']}'], array('controller' => '{$details['controller']}', 'action' => 'view', \${$singularVar}['{$alias}']['{$details['primaryKey']}'])); ?>\n\t\t</td>\n";
-						break;
-					}
-				}
-			}
-			if ($isKey !== true) {
-				echo "\t\t<td>\n\t\t\t<?php echo \${$singularVar}['{$modelClass}']['{$field}']; ?>\n\t\t</td>\n";
+echo "<?php\n";
+echo "\$th = array();\n";
+foreach ($fields as $field) {
+	echo "\$th[] = \$paginator->sort('{$field}');\n";
+}
+echo "\$th[] = __('Actions', true);\n";
+echo "echo \$html->tableHeaders(\$th);\n";
+
+echo "foreach (\${$pluralVar} as \${$singularVar}) {\n";
+echo "\t\$td = array();\n";
+foreach ($fields as $field) {
+	$isKey = false;
+	if (!empty($associations['belongsTo'])) {
+		foreach ($associations['belongsTo'] as $alias => $details) {
+			if ($field === $details['foreignKey']) {
+				$isKey = true;
+				echo "\t\$td[] = \$html->link(\${$singularVar}['{$alias}']['{$details['displayField']}'], array('controller' => '{$details['controller']}', 'action' => 'view', \${$singularVar}['{$alias}']['{$details['primaryKey']}']));\n";
+				break;
 			}
 		}
-
-		echo "\t\t<td class=\"actions\">\n";
-		echo "\t\t\t<?php echo \$html->link(__('View', true), array('action' => 'view', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?>\n";
-	 	echo "\t\t\t<?php echo \$html->link(__('Edit', true), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?>\n";
-	 	echo "\t\t\t<?php echo \$html->link(__('Delete', true), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), null, sprintf(__('Are you sure you want to delete # %s?', true), \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?>\n";
-		echo "\t\t</td>\n";
-	echo "\t</tr>\n";
-
-echo "<?php endforeach; ?>\n";
+	}
+	if ($isKey !== true) {
+		echo "\t\$td[] = h(\${$singularVar}['{$modelClass}']['{$field}']);\n";
+	}
+}
+echo "\t\$actions = array();\n";
+echo "\t\$actions[] = \$html->link(__('View', true), array('action' => 'view', \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
+echo "\t\$actions[] = \$html->link(__('Edit', true), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
+echo "\t\$actions[] = \$html->link(__('Delete', true), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), null, sprintf(__('Are you sure you want to delete # %s?', true), \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
+echo "\t\$td[] = array(implode('', \$actions), array('class' => 'actions'));\n";
+echo "\techo \$html->tableCells(\$td, array('class' => 'altrow'));\n";
+echo "}\n";
+echo "?>\n";
 ?>
 </table>
 </div>
