@@ -10,7 +10,11 @@ color:#999;
 background-color:#FFC;
 }
 
-a:link,a:visited,a:hover,a:active,h1,h2,h3 {
+a:link,
+a:visited,
+a:hover,
+a:active,
+h1,h2,h3 {
 color:#7A1818;
 }
 
@@ -41,7 +45,10 @@ background:#7A1818;
 padding:10px 20px;
 }
 
-#header h1 a:link,#header h1 a:active,#header h1 a:hover,#header h1 a:visited {
+#header h1 a:link,
+#header h1 a:active,
+#header h1 a:hover,
+#header h1 a:visited {
 color:#FFF;
 }
 
@@ -95,13 +102,15 @@ margin-left:15px;
 padding:8px 15px;
 }
 
-#sidebar ul li a:link,#sidebar ul li a:visited {
+#sidebar ul li a:link,
+#sidebar ul li a:visited {
 background:#FFF;
 border-bottom:1px solid #F0F0EE;
 text-decoration:none;
 }
 
-#sidebar ul li a:hover,#sidebar ul li a:active {
+#sidebar ul li a:hover,
+#sidebar ul li a:active {
 background:#470E0E;
 color:#FFF;
 }
@@ -219,7 +228,8 @@ background:#BBB;
 }
 
 /* forms */
-form input,form textarea {
+form input,
+form textarea {
 width:100%;
 border:1px solid #262626;
 font-size:1.1em;
@@ -267,7 +277,8 @@ form input[type=submit] {
 }
 
 /* flash-messages */
-#flashMessage,#authMessage {
+#flashMessage,
+#authMessage {
 -moz-border-radius:3px;
 -webkit-border-radius:3px;
 text-align:center;
@@ -277,7 +288,8 @@ font-size:1.2em;
 font-weight:bold;
 }
 
-#flashMessage.error,#authMessage.message{
+#flashMessage.error,
+#authMessage.message {
 border:1px solid #fbb;
 background-color:#fdd;
 }
