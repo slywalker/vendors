@@ -62,17 +62,19 @@ echo "\t\$actions = array();\n";
 echo "\t\$actions[] = \$html->link(__('View', true), array('action' => 'view', \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
 echo "\t\$actions[] = \$html->link(__('Edit', true), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
 echo "\t\$actions[] = \$html->link(__('Delete', true), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), null, sprintf(__('Are you sure you want to delete # %s?', true), \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
-echo "\t\$td[] = array(implode('', \$actions), array('class' => 'actions'));\n";
+echo "\t\$td[] = array(implode('&nbsp;|&nbsp;', \$actions), array('class' => 'actions'));\n";
 echo "\techo \$html->tableCells(\$td, array('class' => 'altrow'));\n";
 echo "}\n";
 echo "?>\n";
 ?>
 </table>
 </div>
-<div class="paging">
-<?php echo "\t<?php echo \$paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>\n";?>
- | <?php echo "\t<?php echo \$paginator->numbers();?>\n"?>
-<?php echo "\t<?php echo \$paginator->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?>\n";?>
+<div class="actions-bar">
+	<div class="pagination">
+	<?php echo "\t\t<?php echo \$paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>\n";?>
+	 | <?php echo "\t\t<?php echo \$paginator->numbers();?>\n"?>
+	<?php echo "\t\t<?php echo \$paginator->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?>\n";?>
+	</div>
 </div>
 <div class="actions">
 	<ul>

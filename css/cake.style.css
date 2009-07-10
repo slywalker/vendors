@@ -177,6 +177,10 @@ color:#FFF;
 }
 
 /* pagination */
+.pagination div {
+display:inline;
+}
+
 .pagination span.current {
 background:#262626;
 color:#FFF;
@@ -196,6 +200,13 @@ background:#262626;
 /* tables */
 table th {
 background:#262626;
+color:#FFF;
+}
+
+table th a:link,
+table th a:visited,
+table th a:hover,
+table th a:active {
 color:#FFF;
 }
 
