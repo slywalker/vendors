@@ -32,53 +32,53 @@ echo \$paginator->counter(array(
 ?>";?>
 </p>
 <table>
-<?php
-echo "<?php\n";
-echo "\$th = array();\n";
-foreach ($fields as $field) {
-	echo "\$th[] = \$paginator->sort('{$field}');\n";
-}
-echo "\$th[] = __('Actions', true);\n";
-echo "echo \$html->tableHeaders(\$th);\n";
+	<?php
+	echo "<?php\n";
+	echo "\t\$th = array();\n";
+	foreach ($fields as $field) {
+		echo "\t\$th[] = \$paginator->sort('{$field}');\n";
+	}
+	echo "\t\$th[] = __('Actions', true);\n";
+	echo "\techo \$html->tableHeaders(\$th);\n";
 
-echo "foreach (\${$pluralVar} as \${$singularVar}) {\n";
-echo "\t\$td = array();\n";
-foreach ($fields as $field) {
-	$isKey = false;
-	if (!empty($associations['belongsTo'])) {
-		foreach ($associations['belongsTo'] as $alias => $details) {
-			if ($field === $details['foreignKey']) {
-				$isKey = true;
-				echo "\t\$td[] = \$html->link(\${$singularVar}['{$alias}']['{$details['displayField']}'], array('controller' => '{$details['controller']}', 'action' => 'view', \${$singularVar}['{$alias}']['{$details['primaryKey']}']));\n";
-				break;
+	echo "\tforeach (\${$pluralVar} as \${$singularVar}) {\n";
+	echo "\t\t\$td = array();\n";
+	foreach ($fields as $field) {
+		$isKey = false;
+		if (!empty($associations['belongsTo'])) {
+			foreach ($associations['belongsTo'] as $alias => $details) {
+				if ($field === $details['foreignKey']) {
+					$isKey = true;
+					echo "\t\t\$td[] = \$html->link(\${$singularVar}['{$alias}']['{$details['displayField']}'], array('controller' => '{$details['controller']}', 'action' => 'view', \${$singularVar}['{$alias}']['{$details['primaryKey']}']));\n";
+					break;
+				}
 			}
 		}
+		if ($isKey !== true) {
+			echo "\t\t\$td[] = h(\${$singularVar}['{$modelClass}']['{$field}']);\n";
+		}
 	}
-	if ($isKey !== true) {
-		echo "\t\$td[] = h(\${$singularVar}['{$modelClass}']['{$field}']);\n";
-	}
-}
-echo "\t\$actions = array();\n";
-echo "\t\$actions[] = \$html->link(__('View', true), array('action' => 'view', \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
-echo "\t\$actions[] = \$html->link(__('Edit', true), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
-echo "\t\$actions[] = \$html->link(__('Delete', true), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), null, sprintf(__('Are you sure you want to delete # %s?', true), \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
-echo "\t\$td[] = array(implode('&nbsp;|&nbsp;', \$actions), array('class' => 'actions'));\n";
-echo "\techo \$html->tableCells(\$td, array('class' => 'altrow'));\n";
-echo "}\n";
-echo "?>\n";
-?>
+	echo "\t\t\$actions = array();\n";
+	echo "\t\t\$actions[] = \$html->link(__('View', true), array('action' => 'view', \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
+	echo "\t\t\$actions[] = \$html->link(__('Edit', true), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
+	echo "\t\t\$actions[] = \$html->link(__('Delete', true), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), null, sprintf(__('Are you sure you want to delete # %s?', true), \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
+	echo "\t\t\$td[] = array(implode('&nbsp;|&nbsp;', \$actions), array('class' => 'actions'));\n";
+	echo "\t\techo \$html->tableCells(\$td, array('class' => 'altrow'));\n";
+	echo "\t}\n";
+	echo "\t?>\n";
+	?>
 </table>
 </div>
 <div class="actions-bar">
 	<div class="pagination">
-	<?php echo "\t\t<?php echo \$paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>\n";?>
-	 | <?php echo "\t\t<?php echo \$paginator->numbers();?>\n"?>
-	<?php echo "\t\t<?php echo \$paginator->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?>\n";?>
+		<?php echo "<?php echo \$paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>\n";?>
+		 | <?php echo "<?php echo \$paginator->numbers();?>\n"?>
+		<?php echo "<?php echo \$paginator->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?>\n";?>
 	</div>
 </div>
 <div class="actions">
 	<?php
-	echo "\t<?php\n";
+	echo "<?php\n";
 	echo "\t\$li = array();\n";
 	echo "\t\$li[] = \$html->link(__('New {$singularHumanName}', true), array('action' => 'add'));\n";
 	$done = array();

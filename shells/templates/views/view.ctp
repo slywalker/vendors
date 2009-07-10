@@ -40,32 +40,33 @@ foreach ($fields as $field) {
 	}
 	if ($isKey !== true) {
 		echo "\t\t<dt<?php if (\$i % 2 == 0) echo \$class;?>><?php __('".Inflector::humanize($field)."'); ?></dt>\n";
-		echo "\t\t<dd<?php if (\$i++ % 2 == 0) echo \$class;?>>\n\t\t\t<?php echo \${$singularVar}['{$modelClass}']['{$field}']; ?>\n\t\t\t&nbsp;\n\t\t</dd>\n";
+		echo "\t\t<dd<?php if (\$i++ % 2 == 0) echo \$class;?>>\n\t\t\t<?php echo h(\${$singularVar}['{$modelClass}']['{$field}']); ?>\n\t\t\t&nbsp;\n\t\t</dd>\n";
 	}
 }
 ?>
 	</dl>
 </div>
 <div class="actions">
-	<ul>
-<?php
-	echo "\t\t<li><?php echo \$html->link(__('Edit {$singularHumanName}', true), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?> </li>\n";
-	echo "\t\t<li><?php echo \$html->link(__('Delete {$singularHumanName}', true), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), null, sprintf(__('Are you sure you want to delete # %s?', true), \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?> </li>\n";
-	echo "\t\t<li><?php echo \$html->link(__('List {$pluralHumanName}', true), array('action' => 'index')); ?> </li>\n";
-	echo "\t\t<li><?php echo \$html->link(__('New {$singularHumanName}', true), array('action' => 'add')); ?> </li>\n";
-
+	<?php
+	echo "<?php\n";
+	echo "\t\$li = array();\n";
+	echo "\t\$li[] = \$html->link(__('Edit {$singularHumanName}', true), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
+	echo "\t\$li[] = \$html->link(__('Delete {$singularHumanName}', true), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), null, sprintf(__('Are you sure you want to delete # %s?', true), \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
+	echo "\t\$li[] = \$html->link(__('List {$pluralHumanName}', true), array('action' => 'index'));\n";
+	echo "\t\$li[] = \$html->link(__('New {$singularHumanName}', true), array('action' => 'add'));\n";
 	$done = array();
 	foreach ($associations as $type => $data) {
 		foreach ($data as $alias => $details) {
 			if ($details['controller'] != $this->name && !in_array($details['controller'], $done)) {
-				echo "\t\t<li><?php echo \$html->link(__('List ".Inflector::humanize($details['controller'])."', true), array('controller' => '{$details['controller']}', 'action' => 'index')); ?> </li>\n";
-				echo "\t\t<li><?php echo \$html->link(__('New ".Inflector::humanize(Inflector::underscore($alias))."', true), array('controller' => '{$details['controller']}', 'action' => 'add')); ?> </li>\n";
+				echo "\t\$li[] = \$html->link(__('List ".Inflector::humanize($details['controller'])."', true), array('controller' => '{$details['controller']}', 'action' => 'index'));\n";
+				echo "\t\$li[] = \$html->link(__('New ".Inflector::humanize(Inflector::underscore($alias))."', true), array('controller' => '{$details['controller']}', 'action' => 'add'));\n";
 				$done[] = $details['controller'];
 			}
 		}
 	}
-?>
-	</ul>
+	echo "\techo \$html->nestedList(\$li);\n";
+	echo "\t?>\n";
+	?>
 </div>
 <?php
 if (!empty($associations['hasOne'])) :
@@ -77,15 +78,19 @@ if (!empty($associations['hasOne'])) :
 	<?php
 			foreach ($details['fields'] as $field) {
 				echo "\t\t<dt<?php if (\$i % 2 == 0) echo \$class;?>><?php __('".Inflector::humanize($field)."');?></dt>\n";
-				echo "\t\t<dd<?php if (\$i++ % 2 == 0) echo \$class;?>>\n\t<?php echo \${$singularVar}['{$alias}']['{$field}'];?>\n&nbsp;</dd>\n";
+				echo "\t\t<dd<?php if (\$i++ % 2 == 0) echo \$class;?>>\n\t<?php echo h(\${$singularVar}['{$alias}']['{$field}']);?>\n&nbsp;</dd>\n";
 			}
 	?>
 		</dl>
 	<?php echo "<?php endif; ?>\n";?>
 		<div class="actions">
-			<ul>
-				<li><?php echo "<?php echo \$html->link(__('Edit ".Inflector::humanize(Inflector::underscore($alias))."', true), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$singularVar}['{$alias}']['{$details['primaryKey']}'])); ?></li>\n";?>
-			</ul>
+			<?php
+			echo "<?php\n";
+			echo "\t\t\t\$li = array();\n";
+			echo "\t\t\t\$li[] = \$html->link(__('Edit ".Inflector::humanize(Inflector::underscore($alias))."', true), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$singularVar}['{$alias}']['{$details['primaryKey']}']));\n";
+			echo "\t\t\techo \$html->nestedList(\$li);\n";
+			echo "\t\t\t?>\n";
+			?>
 		</div>
 	</div>
 	<?php
@@ -106,45 +111,40 @@ foreach ($relations as $alias => $details):
 <div class="related">
 	<h3><?php echo "<?php __('Related {$otherPluralHumanName}');?>";?></h3>
 	<?php echo "<?php if (!empty(\${$singularVar}['{$alias}'])):?>\n";?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-<?php
-			foreach ($details['fields'] as $field) {
-				echo "\t\t<th><?php __('".Inflector::humanize($field)."'); ?></th>\n";
-			}
-?>
-		<th class="actions"><?php echo "<?php __('Actions');?>";?></th>
-	</tr>
-<?php
-echo "\t<?php
-		\$i = 0;
-		foreach (\${$singularVar}['{$alias}'] as \${$otherSingularVar}):
-			\$class = null;
-			if (\$i++ % 2 == 0) {
-				\$class = ' class=\"altrow\"';
-			}
-		?>\n";
-		echo "\t\t<tr<?php echo \$class;?>>\n";
+	<table>
+		<?php
+		echo "<?php\n";
+		echo "\t\t\$th = array();\n";
+		foreach ($details['fields'] as $field) {
+			echo "\t\t\$th[] = __('".Inflector::humanize($field)."', true);\n";
+		}
+		echo "\t\t\$th[] = __('Actions', true);\n";
+		echo "\t\techo \$html->tableHeaders(\$th);\n";
+		echo "\tforeach (\${$pluralVar} as \${$singularVar}) {\n";
+		echo "\t\t\$td = array();\n";
 
-				foreach ($details['fields'] as $field) {
-					echo "\t\t\t<td><?php echo \${$otherSingularVar}['{$field}'];?></td>\n";
-				}
-
-				echo "\t\t\t<td class=\"actions\">\n";
-				echo "\t\t\t\t<?php echo \$html->link(__('View', true), array('controller' => '{$details['controller']}', 'action' => 'view', \${$otherSingularVar}['{$details['primaryKey']}'])); ?>\n";
-				echo "\t\t\t\t<?php echo \$html->link(__('Edit', true), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$otherSingularVar}['{$details['primaryKey']}'])); ?>\n";
-				echo "\t\t\t\t<?php echo \$html->link(__('Delete', true), array('controller' => '{$details['controller']}', 'action' => 'delete', \${$otherSingularVar}['{$details['primaryKey']}']), null, sprintf(__('Are you sure you want to delete # %s?', true), \${$otherSingularVar}['{$details['primaryKey']}'])); ?>\n";
-				echo "\t\t\t</td>\n";
-			echo "\t\t</tr>\n";
-
-echo "\t<?php endforeach; ?>\n";
-?>
+		foreach ($details['fields'] as $field) {
+			echo "\t\t\t\$td[] = h(\${$otherSingularVar}['{$field}']);\n";
+		}
+		echo "\t\t\t\$actions = array();\n";
+		echo "\t\t\t\$actions[] = \$html->link(__('View', true), array('controller' => '{$details['controller']}', 'action' => 'view', \${$otherSingularVar}['{$details['primaryKey']}']));\n";
+		echo "\t\t\t\$actions[] = \$html->link(__('Edit', true), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$otherSingularVar}['{$details['primaryKey']}']));\n";
+		echo "\t\t\t\$actions[] = \$html->link(__('Delete', true), array('controller' => '{$details['controller']}', 'action' => 'delete', \${$otherSingularVar}['{$details['primaryKey']}']), null, sprintf(__('Are you sure you want to delete # %s?', true), \${$otherSingularVar}['{$details['primaryKey']}']));\n";
+		echo "\t\t\t\$td[] = array(implode('&nbsp;|&nbsp;', \$actions), array('class' => 'actions'));\n";
+		echo "\t\t\techo \$html->tableCells(\$td, array('class' => 'altrow'));\n";
+		echo "\t\t}\n";
+		echo "\t\t?>\n";
+		?>
 	</table>
 <?php echo "<?php endif; ?>\n\n";?>
 	<div class="actions">
-		<ul>
-			<li><?php echo "<?php echo \$html->link(__('New ".Inflector::humanize(Inflector::underscore($alias))."', true), array('controller' => '{$details['controller']}', 'action' => 'add'));?>";?> </li>
-		</ul>
+		<?php
+		echo "<?php\n";
+		echo "\t\t\t\$li = array();\n";
+		echo "\t\t\t\$li[] = \$html->link(__('New ".Inflector::humanize(Inflector::underscore($alias))."', true), array('controller' => '{$details['controller']}', 'action' => 'add'));\n";
+		echo "\t\t\techo \$html->nestedList(\$li);\n";
+		echo "\t\t\t?>\n";
+		?>
 	</div>
 </div>
 <?php endforeach;?>

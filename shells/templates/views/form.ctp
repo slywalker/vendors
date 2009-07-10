@@ -23,47 +23,47 @@
  */
 ?>
 <div class="<?php echo $pluralVar;?> form">
-<?php
-echo "\t<?php\n";
-echo "\techo \$form->create('{$modelClass}');\n";
-echo "\techo \$form->inputs(array(\n";
-echo "\t\t'legend' => __('".Inflector::humanize($action)." {$singularHumanName}', true),\n";
-foreach ($fields as $field) {
-	if ($action == 'add' && $field == $primaryKey) {
-		continue;
-	} elseif (!in_array($field, array('created', 'modified', 'updated'))) {
-		echo "\t\t'{$field}',\n";
-	}
-}
-if (!empty($associations['hasAndBelongsToMany'])) {
-	foreach ($associations['hasAndBelongsToMany'] as $assocName => $assocData) {
-		echo "\t\t'{$assocName}',\n";
-	}
-}
-echo "\t));\n";
-echo "\techo \$form->end('Submit');\n";
-echo "\t?>\n";
-?>
-</div>
-<div class="actions">
-<?php
-echo "\t<?php\n";
-echo "\t\$li = array();\n";
-if ($action != 'add') {
-	echo "\t\$li[] =\$html->link(__('Delete', true), array('action' => 'delete', \$form->value('{$modelClass}.{$primaryKey}')), null, sprintf(__('Are you sure you want to delete # %s?', true), \$form->value('{$modelClass}.{$primaryKey}')));\n";
-}
-echo "\t\$li[] = \$html->link(__('List {$pluralHumanName}', true), array('action' => 'index'));\n";
-$done = array();
-foreach ($associations as $type => $data) {
-	foreach ($data as $alias => $details) {
-		if ($details['controller'] != $this->name && !in_array($details['controller'], $done)) {
-			echo "\t\$li[] = \$html->link(__('List ".Inflector::humanize($details['controller'])."', true), array('controller' => '{$details['controller']}', 'action' => 'index'));\n";
-			echo "\t\$li[] = \$html->link(__('New ".Inflector::humanize(Inflector::underscore($alias))."', true), array('controller' => '{$details['controller']}', 'action' => 'add'));\n";
-			$done[] = $details['controller'];
+	<?php
+	echo "<?php\n";
+	echo "\techo \$form->create('{$modelClass}');\n";
+	echo "\techo \$form->inputs(array(\n";
+	echo "\t\t'legend' => __('".Inflector::humanize($action)." {$singularHumanName}', true),\n";
+	foreach ($fields as $field) {
+		if ($action == 'add' && $field == $primaryKey) {
+			continue;
+		} elseif (!in_array($field, array('created', 'modified', 'updated'))) {
+			echo "\t\t'{$field}',\n";
 		}
 	}
-}
-echo "\techo \$html->nestedList(\$li);\n";
-echo "\t?>\n";
-?>
+	if (!empty($associations['hasAndBelongsToMany'])) {
+		foreach ($associations['hasAndBelongsToMany'] as $assocName => $assocData) {
+			echo "\t\t'{$assocName}',\n";
+		}
+	}
+	echo "\t));\n";
+	echo "\techo \$form->end('Submit');\n";
+	echo "\t?>\n";
+	?>
+</div>
+<div class="actions">
+	<?php
+	echo "<?php\n";
+	echo "\t\$li = array();\n";
+	if ($action != 'add') {
+		echo "\t\$li[] =\$html->link(__('Delete', true), array('action' => 'delete', \$form->value('{$modelClass}.{$primaryKey}')), null, sprintf(__('Are you sure you want to delete # %s?', true), \$form->value('{$modelClass}.{$primaryKey}')));\n";
+	}
+	echo "\t\$li[] = \$html->link(__('List {$pluralHumanName}', true), array('action' => 'index'));\n";
+	$done = array();
+	foreach ($associations as $type => $data) {
+		foreach ($data as $alias => $details) {
+			if ($details['controller'] != $this->name && !in_array($details['controller'], $done)) {
+				echo "\t\$li[] = \$html->link(__('List ".Inflector::humanize($details['controller'])."', true), array('controller' => '{$details['controller']}', 'action' => 'index'));\n";
+				echo "\t\$li[] = \$html->link(__('New ".Inflector::humanize(Inflector::underscore($alias))."', true), array('controller' => '{$details['controller']}', 'action' => 'add'));\n";
+				$done[] = $details['controller'];
+			}
+		}
+	}
+	echo "\techo \$html->nestedList(\$li);\n";
+	echo "\t?>\n";
+	?>
 </div>
