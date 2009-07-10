@@ -21,19 +21,11 @@
 		<div id="header">
 			<h1><?php echo $html->link(__('CakePHP: the rapid development php framework', true), 'http://cakephp.org'); ?></h1>
 			<div id="user-navigation">
-				<?php //echo $this->element('user_navigation'); ?>
+				<?php echo $this->element('user_navigation'); ?>
 				<div class="clear"></div>
 			</div>	  
 			<div id="main-navigation">
-				<?php
-				/*
-				if (Configure::read('AccountUser.name')) {
-					echo $this->element('main_navigation');
-				} else {
-					echo $this->element('home_navigation');
-				}
-				*/
-				?>
+				<?php echo $this->element('main_navigation'); ?>
 				<div class="clear"></div>
 			</div>
 		</div>	  
@@ -46,7 +38,7 @@
 
 			</div>
 			<div id="sidebar">
-				<?php //echo $this->element('sidebar'); ?>
+				<?php echo $this->element('sidebar'); ?>
 			</div>
 			<div class="clear"></div>
 		</div>
