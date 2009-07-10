@@ -1,2 +1,2 @@
 // Skel指定方法
-$ cake bake project -skel /your/skel/path
+$ cake bake project -skel /your/skel/path myapp
