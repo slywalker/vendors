@@ -40,5 +40,7 @@
  * $controllerPaths = array('this path to controllers', 'second full path to controllers', 'etc...');
  *
  */
+$pluginPaths = array(ROOT.DS.'plugins'.DS);
+$vendorPaths = array(ROOT.DS.'vendors'.DS);
 //EOF
 ?>
