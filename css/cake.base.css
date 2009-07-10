@@ -321,9 +321,12 @@ form .columns .right {
 float:right;
 }
 
-form label,form .text input,form .textarea textarea {
-font-size:.9em;
-padding:1px 0;
+form label,
+form input,
+form textarea,
+form select {
+font-size:1.1em;
+padding:2px;
 margin:0;
 }
 
@@ -388,7 +391,7 @@ padding:10px;
 }
 
 form fieldset legend {
-font-size:1.2em;
+font-size:1.4em;
 font-weight:bold;
 line-height:1.5;
 padding:4px;

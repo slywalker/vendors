@@ -33,6 +33,20 @@ background:#f0f0ee;
 color:#f0f0ee;
 }
 
+dt {
+font-weight:bold;
+}
+
+dd {
+padding-left:6em;
+border-bottom:1px solid #999;
+}
+
+dt.altrow,
+dd.altrow {
+background-color:#CCC;
+}
+
 #container {
 font-size:1em;
 }
@@ -224,15 +238,18 @@ border-bottom:1px solid #F0F0EE;
 }
 
 table .altrow {
-background:#BBB;
+background:#CCC;
 }
 
 /* forms */
+form legend {
+color:#7A1818;
+}
+
 form input,
 form textarea {
 width:100%;
 border:1px solid #262626;
-font-size:1.1em;
 }
 
 form input.button {
