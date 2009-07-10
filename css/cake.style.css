@@ -295,7 +295,8 @@ form input[type=submit] {
 
 /* flash-messages */
 #flashMessage,
-#authMessage {
+#authMessage,
+.message {
 -moz-border-radius:3px;
 -webkit-border-radius:3px;
 text-align:center;
@@ -306,18 +307,21 @@ font-weight:bold;
 }
 
 #flashMessage.error,
-#authMessage.message {
+#authMessage.message,
+.message.error {
 border:1px solid #fbb;
 background-color:#fdd;
 }
 
-#flashMessage.warning {
+#flashMessage.warning,
+.message.warning {
 border:1px solid #fffaaa;
 background-color:#ffc;
 }
 
 #flashMessage.notice,
-#flashMessage.message {
+#flashMessage.message,
+.message {
 border:1px solid #1FDF00;
 background-color:#BBFFB6;
 }
