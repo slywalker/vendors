@@ -248,7 +248,6 @@ color:#7A1818;
 
 form input,
 form textarea {
-width:100%;
 border:1px solid #262626;
 }
 
@@ -296,7 +295,8 @@ form input[type=submit] {
 /* flash-messages */
 #flashMessage,
 #authMessage,
-.notice {
+.notice
+p.error {
 display:block;
 -moz-border-radius:3px;
 -webkit-border-radius:3px;
@@ -307,9 +307,10 @@ font-size:1.2em;
 font-weight:bold;
 }
 
-#flashMessage.error,
+#flashMessage.message,
 #authMessage.message,
-.notice {
+.notice,
+p.error {
 border:1px solid #fbb;
 background-color:#fdd;
 }
@@ -321,7 +322,7 @@ background-color:#ffc;
 }
 
 #flashMessage.notice,
-#flashMessage.message,
+#flashMessage.success,
 .notice.success {
 border:1px solid #1FDF00;
 background-color:#BBFFB6;

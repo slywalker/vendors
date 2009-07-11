@@ -326,7 +326,7 @@ form input,
 form textarea,
 form select {
 font-size:1.1em;
-padding:2px;
+padding:2px 1em 2px 0;
 margin:0;
 }
 
@@ -334,12 +334,15 @@ form label.right {
 text-align:right;
 }
 
-form .checkbox,form .radio {
+form .checkbox,
+form .radio {
 vertical-align: text-bottom;
 }
 
-form .checkbox input,form .radio input {
+form .checkbox input,
+form .radio input {
 margin-right:5px;
+width:auto;
 }
 
 form .checkbox label,.form .radio label {
@@ -361,8 +364,9 @@ font-size:1em;
 font-weight:bold;
 }
 
-form input,form textarea {
-width:100%;
+form input,
+form textarea {
+width:90%;
 border-width:1px;
 border-style:solid;
 }
@@ -403,7 +407,7 @@ margin:6px 0;
 
 form .submit input {
 padding:4px 6px;
-font-size:1.2em;
+font-size:1em;
 width:auto;
 }
 
