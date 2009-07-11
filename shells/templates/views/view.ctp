@@ -88,27 +88,27 @@ foreach ($relations as $alias => $details):
 		<?php echo "<?php if (!empty(\${$singularVar}['{$alias}'])):?>\n";?>
 		<table>
 <?php
-echo "\t\t<?php\n";
-echo "\t\t\$th = array();\n";
+echo "\t\t\t<?php\n";
+echo "\t\t\t\$th = array();\n";
 foreach ($details['fields'] as $field) {
-	echo "\t\t\$th[] = __('".Inflector::humanize($field)."', true);\n";
+	echo "\t\t\t\$th[] = __('".Inflector::humanize($field)."', true);\n";
 }
-echo "\t\t\$th[] = __('Actions', true);\n";
-echo "\t\techo \$html->tableHeaders(\$th);\n";
-echo "\tforeach (\${$singularVar}['{$alias}'] as \${$otherSingularVar}) {\n";
-echo "\t\t\$td = array();\n";
+echo "\t\t\t\$th[] = __('Actions', true);\n";
+echo "\t\t\techo \$html->tableHeaders(\$th);\n";
+echo "\t\t\tforeach (\${$singularVar}['{$alias}'] as \${$otherSingularVar}) {\n";
+echo "\t\t\t\t\$td = array();\n";
 
 foreach ($details['fields'] as $field) {
-	echo "\t\t\t\$td[] = h(\${$otherSingularVar}['{$field}']);\n";
+	echo "\t\t\t\t\$td[] = h(\${$otherSingularVar}['{$field}']);\n";
 }
-echo "\t\t\t\$actions = array();\n";
-echo "\t\t\t\$actions[] = \$html->link(__('View', true), array('controller' => '{$details['controller']}', 'action' => 'view', \${$otherSingularVar}['{$details['primaryKey']}']));\n";
-echo "\t\t\t\$actions[] = \$html->link(__('Edit', true), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$otherSingularVar}['{$details['primaryKey']}']));\n";
-echo "\t\t\t\$actions[] = \$html->link(__('Delete', true), array('controller' => '{$details['controller']}', 'action' => 'delete', \${$otherSingularVar}['{$details['primaryKey']}']), null, sprintf(__('Are you sure you want to delete # %s?', true), \${$otherSingularVar}['{$details['primaryKey']}']));\n";
-echo "\t\t\t\$td[] = array(implode('&nbsp;|&nbsp;', \$actions), array('class' => 'actions'));\n";
-echo "\t\t\techo \$html->tableCells(\$td, array('class' => 'altrow'));\n";
-echo "\t\t}\n";
-echo "\t\t?>\n";
+echo "\t\t\t\t\$actions = array();\n";
+echo "\t\t\t\t\$actions[] = \$html->link(__('View', true), array('controller' => '{$details['controller']}', 'action' => 'view', \${$otherSingularVar}['{$details['primaryKey']}']));\n";
+echo "\t\t\t\t\$actions[] = \$html->link(__('Edit', true), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$otherSingularVar}['{$details['primaryKey']}']));\n";
+echo "\t\t\t\t\$actions[] = \$html->link(__('Delete', true), array('controller' => '{$details['controller']}', 'action' => 'delete', \${$otherSingularVar}['{$details['primaryKey']}']), null, sprintf(__('Are you sure you want to delete # %s?', true), \${$otherSingularVar}['{$details['primaryKey']}']));\n";
+echo "\t\t\t\t\$td[] = array(implode('&nbsp;|&nbsp;', \$actions), array('class' => 'actions'));\n";
+echo "\t\t\t\techo \$html->tableCells(\$td, array('class' => 'altrow'));\n";
+echo "\t\t\t}\n";
+echo "\t\t\t?>\n";
 ?>
 		</table>
 		<?php echo "<?php endif; ?>\n\n";?>
