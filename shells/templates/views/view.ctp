@@ -88,14 +88,14 @@ foreach ($relations as $alias => $details):
 		<?php echo "<?php if (!empty(\${$singularVar}['{$alias}'])):?>\n";?>
 		<table>
 <?php
-echo "\t\t\<?php\n";
+echo "\t\t<?php\n";
 echo "\t\t\$th = array();\n";
 foreach ($details['fields'] as $field) {
 	echo "\t\t\$th[] = __('".Inflector::humanize($field)."', true);\n";
 }
 echo "\t\t\$th[] = __('Actions', true);\n";
 echo "\t\techo \$html->tableHeaders(\$th);\n";
-echo "\tforeach (\${$pluralVar} as \${$singularVar}) {\n";
+echo "\tforeach (\${$singularVar}['{$alias}'] as \${$otherSingularVar}) {\n";
 echo "\t\t\$td = array();\n";
 
 foreach ($details['fields'] as $field) {
