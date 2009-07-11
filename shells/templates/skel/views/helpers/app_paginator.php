@@ -14,7 +14,7 @@ class AppPaginatorHelper extends AppHelper {
 		$a = array();
 		foreach ($currents as $current) {
 			if ($current == $limit) {
-				$a[] = '<em>' . $current . '</em>';
+				$a[] = '<em>'.$current.'</em>';
 			} else {
 				$a[] = $this->Paginator->link($current, array('limit' => $current));
 			}
