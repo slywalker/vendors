@@ -1,25 +1,34 @@
 <div id="main">
 	<div class="<?php echo $pluralVar;?> view">
 		<h2><?php echo "<?php  __('{$singularHumanName}');?>";?></h2>
-		<dl><?php echo "<?php \$i = 0; \$class = ' class=\"altrow\"';?>\n";?>
+		<dl>
 <?php
+echo "\t\t\t<?php\n";
+echo "\t\t\t\$lists = array();\n";
 foreach ($fields as $field) {
 	$isKey = false;
 	if (!empty($associations['belongsTo'])) {
 		foreach ($associations['belongsTo'] as $alias => $details) {
 			if ($field === $details['foreignKey']) {
 				$isKey = true;
-				echo "\t\t\t<dt<?php if (\$i % 2 == 0) echo \$class;?>><?php __('".Inflector::humanize(Inflector::underscore($alias))."'); ?></dt>\n";
-				echo "\t\t\t<dd<?php if (\$i++ % 2 == 0) echo \$class;?>>\n\t\t\t\t<?php echo \$html->link(\${$singularVar}['{$alias}']['{$details['displayField']}'], array('controller' => '{$details['controller']}', 'action' => 'view', \${$singularVar}['{$alias}']['{$details['primaryKey']}'])); ?>\n\t\t\t\t&nbsp;\n\t\t\t</dd>\n";
+				echo "\t\t\t\$lists[] = array('dt' => __('".Inflector::humanize(Inflector::underscore($alias))."', true), 'dd' => \$html->link(\${$singularVar}['{$alias}']['{$details['displayField']}'], array('controller' => '{$details['controller']}', 'action' => 'view', \${$singularVar}['{$alias}']['{$details['primaryKey']}'])));\n";
 				break;
 			}
 		}
 	}
 	if ($isKey !== true) {
-		echo "\t\t\t<dt<?php if (\$i % 2 == 0) echo \$class;?>><?php __('".Inflector::humanize($field)."'); ?></dt>\n";
-		echo "\t\t\t<dd<?php if (\$i++ % 2 == 0) echo \$class;?>>\n\t\t\t\t<?php echo h(\${$singularVar}['{$modelClass}']['{$field}']); ?>\n\t\t\t\t&nbsp;\n\t\t\t</dd>\n";
+		echo "\t\t\t\$lists[] = array('dt' => __('".Inflector::humanize($field)."', true), 'dd' => h(\${$singularVar}['{$modelClass}']['{$field}']));\n";
 	}
 }
+echo "\t\t\tforeach (\$lists as \$key => \$list) {\n";
+echo "\t\t\t\t\$class = array();\n";
+echo "\t\t\t\tif (\$key % 2 == 0) {\n";
+echo "\t\t\t\t\t\$class = array('class' => 'altrow');\n";
+echo "\t\t\t\t}\n";
+echo "\t\t\t\techo \$html->tag('dt', \$list['dt'], \$class);\n";
+echo "\t\t\t\techo \$html->tag('dd', \$list['dd'].'&nbsp;', \$class);\n";
+echo "\t\t\t}\n";
+echo "\t\t\t?>\n";
 ?>
 		</dl>
 	</div>
@@ -32,10 +41,20 @@ if (!empty($associations['hasOne'])) :
 		<?php echo "<?php if (!empty(\${$singularVar}['{$alias}'])):?>\n";?>
 		<dl><?php echo "\t<?php \$i = 0; \$class = ' class=\"altrow\"';?>\n";?>
 <?php
+echo "\t\t\t<?php\n";
+echo "\t\t\t\$lists = array();\n";
 foreach ($details['fields'] as $field) {
-	echo "\t\t\t<dt<?php if (\$i % 2 == 0) echo \$class;?>><?php __('".Inflector::humanize($field)."');?></dt>\n";
-	echo "\t\t\t<dd<?php if (\$i++ % 2 == 0) echo \$class;?>>\n\t\t<?php echo h(\${$singularVar}['{$alias}']['{$field}']);?>\n&nbsp;</dd>\n";
+	echo "\t\t\t\$lists[] = array('dt' => __('".Inflector::humanize($field)."', true), 'dd' => h(\${$singularVar}['{$alias}']['{$field}']));\n";
 }
+echo "\t\t\tforeach (\$lists as \$key => \$list) {\n";
+echo "\t\t\t\t\$class = array();\n";
+echo "\t\t\t\tif (\$key % 2 == 0) {\n";
+echo "\t\t\t\t\t\$class = array('class' => 'altrow');\n";
+echo "\t\t\t\t}\n";
+echo "\t\t\t\techo \$html->tag('dt', \$list['dt'], \$class);\n";
+echo "\t\t\t\techo \$html->tag('dd', \$list['dd'].'&nbsp;', \$class);\n";
+echo "\t\t\t}\n";
+echo "\t\t\t?>\n";
 ?>
 		</dl>
 	<?php echo "<?php endif; ?>\n";?>
@@ -49,7 +68,7 @@ echo "\t\t\t?>\n";
 ?>
 		</div>
 	</div>
-	<?php
+<?php
 	endforeach;
 endif;
 if (empty($associations['hasMany'])) {
@@ -63,46 +82,46 @@ $i = 0;
 foreach ($relations as $alias => $details):
 	$otherSingularVar = Inflector::variable($alias);
 	$otherPluralHumanName = Inflector::humanize($details['controller']);
-	?>
-<div class="related">
-	<h3><?php echo "<?php __('Related {$otherPluralHumanName}');?>";?></h3>
-	<?php echo "<?php if (!empty(\${$singularVar}['{$alias}'])):?>\n";?>
-	<table>
-		<?php
-		echo "<?php\n";
-		echo "\t\t\$th = array();\n";
-		foreach ($details['fields'] as $field) {
-			echo "\t\t\$th[] = __('".Inflector::humanize($field)."', true);\n";
-		}
-		echo "\t\t\$th[] = __('Actions', true);\n";
-		echo "\t\techo \$html->tableHeaders(\$th);\n";
-		echo "\tforeach (\${$pluralVar} as \${$singularVar}) {\n";
-		echo "\t\t\$td = array();\n";
+?>
+	<div class="related">
+		<h3><?php echo "<?php __('Related {$otherPluralHumanName}');?>";?></h3>
+		<?php echo "<?php if (!empty(\${$singularVar}['{$alias}'])):?>\n";?>
+		<table>
+<?php
+echo "\t\t\<?php\n";
+echo "\t\t\$th = array();\n";
+foreach ($details['fields'] as $field) {
+	echo "\t\t\$th[] = __('".Inflector::humanize($field)."', true);\n";
+}
+echo "\t\t\$th[] = __('Actions', true);\n";
+echo "\t\techo \$html->tableHeaders(\$th);\n";
+echo "\tforeach (\${$pluralVar} as \${$singularVar}) {\n";
+echo "\t\t\$td = array();\n";
 
-		foreach ($details['fields'] as $field) {
-			echo "\t\t\t\$td[] = h(\${$otherSingularVar}['{$field}']);\n";
-		}
-		echo "\t\t\t\$actions = array();\n";
-		echo "\t\t\t\$actions[] = \$html->link(__('View', true), array('controller' => '{$details['controller']}', 'action' => 'view', \${$otherSingularVar}['{$details['primaryKey']}']));\n";
-		echo "\t\t\t\$actions[] = \$html->link(__('Edit', true), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$otherSingularVar}['{$details['primaryKey']}']));\n";
-		echo "\t\t\t\$actions[] = \$html->link(__('Delete', true), array('controller' => '{$details['controller']}', 'action' => 'delete', \${$otherSingularVar}['{$details['primaryKey']}']), null, sprintf(__('Are you sure you want to delete # %s?', true), \${$otherSingularVar}['{$details['primaryKey']}']));\n";
-		echo "\t\t\t\$td[] = array(implode('&nbsp;|&nbsp;', \$actions), array('class' => 'actions'));\n";
-		echo "\t\t\techo \$html->tableCells(\$td, array('class' => 'altrow'));\n";
-		echo "\t\t}\n";
-		echo "\t\t?>\n";
-		?>
-	</table>
-<?php echo "<?php endif; ?>\n\n";?>
-	<div class="actions">
-		<?php
-		echo "<?php\n";
-		echo "\t\t\t\$li = array();\n";
-		echo "\t\t\t\$li[] = \$html->link(__('New ".Inflector::humanize(Inflector::underscore($alias))."', true), array('controller' => '{$details['controller']}', 'action' => 'add'));\n";
-		echo "\t\t\techo \$html->nestedList(\$li);\n";
-		echo "\t\t\t?>\n";
-		?>
+foreach ($details['fields'] as $field) {
+	echo "\t\t\t\$td[] = h(\${$otherSingularVar}['{$field}']);\n";
+}
+echo "\t\t\t\$actions = array();\n";
+echo "\t\t\t\$actions[] = \$html->link(__('View', true), array('controller' => '{$details['controller']}', 'action' => 'view', \${$otherSingularVar}['{$details['primaryKey']}']));\n";
+echo "\t\t\t\$actions[] = \$html->link(__('Edit', true), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$otherSingularVar}['{$details['primaryKey']}']));\n";
+echo "\t\t\t\$actions[] = \$html->link(__('Delete', true), array('controller' => '{$details['controller']}', 'action' => 'delete', \${$otherSingularVar}['{$details['primaryKey']}']), null, sprintf(__('Are you sure you want to delete # %s?', true), \${$otherSingularVar}['{$details['primaryKey']}']));\n";
+echo "\t\t\t\$td[] = array(implode('&nbsp;|&nbsp;', \$actions), array('class' => 'actions'));\n";
+echo "\t\t\techo \$html->tableCells(\$td, array('class' => 'altrow'));\n";
+echo "\t\t}\n";
+echo "\t\t?>\n";
+?>
+		</table>
+		<?php echo "<?php endif; ?>\n\n";?>
+		<div class="actions">
+<?php
+echo "\t\t\t<?php\n";
+echo "\t\t\t\$li = array();\n";
+echo "\t\t\t\$li[] = \$html->link(__('New ".Inflector::humanize(Inflector::underscore($alias))."', true), array('controller' => '{$details['controller']}', 'action' => 'add'));\n";
+echo "\t\t\techo \$html->nestedList(\$li);\n";
+echo "\t\t\t?>\n";
+?>
+		</div>
 	</div>
-</div>
 <?php endforeach;?>
 </div>
 <div id="sidebar">
