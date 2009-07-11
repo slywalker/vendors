@@ -164,9 +164,6 @@ dl dd {
 	color: #FFF;
 }
 /* pagination */
-.pagination div {
-	display: inline;
-}
 .pagination span.current {
 	background: #262626;
 	color: #FFF;
@@ -200,7 +197,7 @@ form legend {
 }
 form input,
 form textarea,
-form div {
+form .input {
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 }

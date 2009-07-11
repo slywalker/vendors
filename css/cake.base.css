@@ -66,10 +66,10 @@ body{font-family:sans-serif;font-size:62.5％}
 .secondary-navigation ul li a{display:block;padding:6px 12px 2px;}
 #footer{position:fixed!important;position:absolute;bottom:0;left:0;width:100%;font-family:Verdana,Arial,Helvetica,sans-serif;font-size:.8em;height:24px;padding:6px 0;}
 /* pagination */
+.pagination .disabled{display: none;}
 .pagination a,
-.pagination span.current{padding:2px 5px;margin-right:5px;display:block;float:left;border-style:solid;border-width:1px;line-height:1.1;}
+.pagination span.current{padding:2px 5px;margin-right:5px;display:block;float:left;border-style:solid;border-width:1px;line-height:1.1;text-decoration:none;}
 .pagination span.current{font-weight:700;}
-.pagination a{text-decoration:none;}
 /* tables */
 table{width:100%;border-collapse:collapse;margin-bottom:15px;}
 table th{padding:10px;font-weight:700;text-align:left;}

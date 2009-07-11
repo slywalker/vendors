@@ -58,7 +58,7 @@ echo "\t\t\t?>\n";
 		</div>
 		<div class="pagination">
 			<?php echo "<?php echo \$paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>\n";?>
-			 | <?php echo "<?php echo \$paginator->numbers();?>\n"?>
+			<?php echo "<?php echo \$paginator->numbers(array('separator' => null));?>\n"?>
 			<?php echo "<?php echo \$paginator->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?>\n";?>
 		</div>
 		<div class="clear"></div>
