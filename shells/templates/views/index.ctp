@@ -1,5 +1,5 @@
 <div id="main">
-	<?php echo "<?php echo \$form->create('{$modelClass}', array('action' => 'delete'));?>\n"?>
+	<?php echo "<?php echo \$form->create(null, array('action' => 'delete'));?>\n"?>
 	<div class="<?php echo $pluralVar;?> index">
 		<h2><?php echo "<?php __('{$pluralHumanName}');?>";?></h2>
 		<p>
