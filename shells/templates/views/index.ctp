@@ -65,22 +65,24 @@ echo "\t\t\t?>\n";
 	</form>
 </div>
 <div id="sidebar">
-	<h3><?php echo __('Actions');?></h3>
+	<div class="block">
+		<h3><?php echo __('Actions');?></h3>
 <?php
-echo "\t<?php\n";
-echo "\t\$li = array();\n";
-echo "\t\$li[] = \$html->link(__('New {$singularHumanName}', true), array('action' => 'add'));\n";
+echo "\t\t<?php\n";
+echo "\t\t\$li = array();\n";
+echo "\t\t\$li[] = \$html->link(__('New {$singularHumanName}', true), array('action' => 'add'));\n";
 $done = array();
 foreach ($associations as $type => $data) {
 	foreach ($data as $alias => $details) {
 		if ($details['controller'] != $this->name && !in_array($details['controller'], $done)) {
-			echo "\t\$li[] = \$html->link(__('List ".Inflector::humanize($details['controller'])."', true), array('controller' => '{$details['controller']}', 'action' => 'index'));\n";
-			echo "\t\$li[] = \$html->link(__('New ".Inflector::humanize(Inflector::underscore($alias))."', true), array('controller' => '{$details['controller']}', 'action' => 'add'));\n";
+			echo "\t\t\$li[] = \$html->link(__('List ".Inflector::humanize($details['controller'])."', true), array('controller' => '{$details['controller']}', 'action' => 'index'));\n";
+			echo "\t\t\$li[] = \$html->link(__('New ".Inflector::humanize(Inflector::underscore($alias))."', true), array('controller' => '{$details['controller']}', 'action' => 'add'));\n";
 			$done[] = $details['controller'];
 		}
 	}
 }
-echo "\techo \$html->nestedList(\$li, array('class'=>'navigation'));\n";
-echo "\t?>\n";
+echo "\t\techo \$html->nestedList(\$li, array('class'=>'navigation'));\n";
+echo "\t\t?>\n";
 ?>
+	</div>
 </div>
