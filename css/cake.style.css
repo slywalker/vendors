@@ -292,6 +292,8 @@ form input[type=submit] {
 -webkit-border-radius:4px;
 -moz-border-radius:4px;
 -webkit-border-radius:4px;
+text-align:center;
+width:auto;
 }
 
 /* flash-messages */

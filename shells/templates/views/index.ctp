@@ -1,4 +1,5 @@
 <div id="main">
+	<?php echo "<?php echo \$form->create('{$modelClass}', array('action' => 'delete'));?>\n"?>
 	<div class="<?php echo $pluralVar;?> index">
 		<h2><?php echo "<?php __('{$pluralHumanName}');?>";?></h2>
 		<p>
@@ -14,14 +15,16 @@ echo \$paginator->counter(array(
 <?php
 echo "\t\t\t<?php\n";
 echo "\t\t\t\$th = array();\n";
+echo "\t\t\t\$th[] = __('Delete', true);\n";
 foreach ($fields as $field) {
 	echo "\t\t\t\$th[] = \$paginator->sort('{$field}');\n";
 }
 echo "\t\t\t\$th[] = __('Actions', true);\n";
 echo "\t\t\techo \$html->tableHeaders(\$th);\n";
 
-echo "\t\t\tforeach (\${$pluralVar} as \${$singularVar}) {\n";
+echo "\t\t\tforeach (\${$pluralVar} as \$key => \${$singularVar}) {\n";
 echo "\t\t\t\t\$td = array();\n";
+echo "\t\t\t\t\$td[] = \$form->checkbox('delete.'.\$key, array('value' => \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
 foreach ($fields as $field) {
 	$isKey = false;
 	if (!empty($associations['belongsTo'])) {
@@ -49,12 +52,17 @@ echo "\t\t\t?>\n";
 		</table>
 	</div>
 	<div class="actions-bar">
+		<div class="actions">
+			<?php echo "<?php echo \$form->submit('Delete', array('div' => false));?>\n"?>
+		</div>
 		<div class="pagination">
 			<?php echo "<?php echo \$paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>\n";?>
 			 | <?php echo "<?php echo \$paginator->numbers();?>\n"?>
 			<?php echo "<?php echo \$paginator->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?>\n";?>
 		</div>
+		<div class="clear"></div>
 	</div>
+	</form>
 </div>
 <div id="sidebar">
 	<h3><?php echo __('Actions');?></h3>

@@ -377,12 +377,31 @@ class ControllerTask extends Shell {
 			$actions .= "\t\t\t\$this->flash(__('Invalid {$singularHumanName}', true), array('action'=>'index'));\n";
 		}
 		$actions .= "\t\t}\n";
-		$actions .= "\t\tif (\$this->{$currentModelName}->del(\$id)) {\n";
+		$actions .= "\t\tif (\$this->{$currentModelName}->delete(\$id)) {\n";
 		if ($wannaUseSession) {
 			$actions .= "\t\t\t\$this->Session->setFlash(__('{$singularHumanName} deleted', true), 'default', array('class' => 'message success'));\n";
 			$actions .= "\t\t\t\$this->redirect(array('action'=>'index'));\n";
 		} else {
 			$actions .= "\t\t\t\$this->flash(__('{$singularHumanName} deleted', true), array('action'=>'index'));\n";
+		}
+		$actions .= "\t\t}\n";
+		$actions .= "\t}\n";
+		$actions .= "\n";
+		$actions .= "\tfunction {$admin}delete_all() {\n";
+		$actions .= "\t\tif (\$this->data) {\n";
+		$actions .= "\t\t\tif (\$this->{$currentModelName}->deleteAll(array('id' => \$this->data['{$currentModelName}']['delete']))) {\n";
+		if ($wannaUseSession) {
+			$actions .= "\t\t\t\$this->Session->setFlash(__('{$singularHumanName} deleted', true), 'default', array('class' => 'message success'));\n";
+			$actions .= "\t\t\t\$this->redirect(array('action'=>'index'));\n";
+		} else {
+			$actions .= "\t\t\t\$this->flash(__('{$singularHumanName} deleted', true), array('action'=>'index'));\n";
+		}
+		$actions .= "\t\t} else {\n";
+		if ($wannaUseSession) {
+			$actions .= "\t\t\t\$this->Session->setFlash(__('Invalid id for {$singularHumanName}', true));\n";
+			$actions .= "\t\t\t\$this->redirect(array('action'=>'index'));\n";
+		} else {
+			$actions .= "\t\t\t\$this->flash(__('Invalid {$singularHumanName}', true), array('action'=>'index'));\n";
 		}
 		$actions .= "\t\t}\n";
 		$actions .= "\t}\n";
