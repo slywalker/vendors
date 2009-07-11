@@ -14,6 +14,9 @@ pre.cake-debug {
 	position: relative;
 	z-index:99;
 }
+table.cake-sql-log {
+	margin-bottom: 100px;
+}
 div.cake-stack-trace {
 	background: #fff;
 	border: 4px dotted #ffcc00;

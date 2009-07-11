@@ -32,15 +32,10 @@
 		</div>	  
 		<div id="header-margin"></div>
 		<div id="wrapper">
-			<div id="main">
-		
+
 				<?php $session->flash(); ?>
 				<?php echo $content_for_layout; ?>
 
-			</div>
-			<div id="sidebar">
-				<?php echo $this->element('sidebar'); ?>
-			</div>
 			<div class="clear"></div>
 		</div>
 		<div id="footer">

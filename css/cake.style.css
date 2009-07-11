@@ -131,6 +131,8 @@ color:#FFF;
 
 #main-navigation {
 background:#262626;
+width:95%;
+margin:0 auto;
 }
 
 #main-navigation ul li {
@@ -295,14 +297,13 @@ form input[type=submit] {
 /* flash-messages */
 #flashMessage,
 #authMessage,
-.notice
+.notice,
 p.error {
 display:block;
 -moz-border-radius:3px;
 -webkit-border-radius:3px;
-text-align:center;
 margin:0 auto 15px;
-padding:4px 0;
+padding:4px;
 font-size:1.2em;
 font-weight:bold;
 }
@@ -315,13 +316,12 @@ border:1px solid #fbb;
 background-color:#fdd;
 }
 
-#flashMessage.warning,
+#flashMessage.notice,
 .notice.warning {
 border:1px solid #fffaaa;
 background-color:#ffc;
 }
 
-#flashMessage.notice,
 #flashMessage.success,
 .notice.success {
 border:1px solid #1FDF00;
