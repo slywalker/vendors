@@ -1,7 +1,3 @@
-/*
-* bgcolor fdFFFf
-* header and footer 7a1818
-*/
 .small {
 	font-size: .8em;
 }
@@ -10,6 +6,9 @@
 }
 .hightlight {
 	background-color: #ffc;
+}
+.altrow {
+	background-color: #D2FFFF;
 }
 a:link,
 a:visited,
@@ -30,16 +29,15 @@ hr {
 	background: #f0f0ee;
 	color: #f0f0ee;
 }
-dt {
-	font-weight: bold;
+dl {
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	background-color: #fff;
+	border: 1px solid #E3E4E7;
+	border-top: 10px solid #91959D;
 }
-dd {
-	padding-left: 6em;
-	border-bottom: 1px solid #999;
-}
-dt.altrow,
-dd.altrow {
-	background-color: #ccc;
+dl dd {
+	border-bottom: 1px solid #91959D;
 }
 #container {
 	font-size: 1em;
@@ -177,6 +175,9 @@ dd.altrow {
 	background: #262626;
 }
 /* tables */
+table {
+	background-color: #FFF;
+}
 table th {
 	background: #91959D;
 	color: #FFF;
@@ -187,13 +188,6 @@ table th a:hover,
 table th a:active {
 	color: #FFF;
 }
-table td {
-	background-color: #FFF;
-	border-bottom: 1px solid #FFF;
-}
-table .altrow td {
-	background-color: #D2FFFF;
-}
 /* forms */
 form legend {
 	color: #7A1818;
@@ -201,8 +195,6 @@ form legend {
 form input,
 form textarea,
 form div {
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 }
@@ -216,8 +208,6 @@ form .description {
 	font-size: .9em;
 }
 form fieldset {
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border: 1px solid #99928F;
@@ -236,8 +226,6 @@ form .error-message {
 	font-weight: bold;
 }
 form input[type=submit] {
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	background: #eee;
