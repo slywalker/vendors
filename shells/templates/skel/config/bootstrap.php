@@ -31,6 +31,10 @@
  * You can also use this to include or require any files in your application.
  *
  */
+	Configure::write('debug', 0);
+	if ('On' === env('HTTP_DEBUG')) {
+		Configure::write('debug', 2);
+	}
 /**
  * The settings below can be used to set additional paths to models, views and controllers.
  * This is related to Ticket #470 (https://trac.cakephp.org/ticket/470)
@@ -40,6 +44,6 @@
  * $controllerPaths = array('this path to controllers', 'second full path to controllers', 'etc...');
  *
  */
-$pluginPaths = array(ROOT.DS.'plugins'.DS);
+	$pluginPaths = array(ROOT.DS.'plugins'.DS);
 //EOF
 ?>
