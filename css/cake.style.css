@@ -132,6 +132,12 @@ dl dd {
 	color: #FFF;
 	border-bottom: 10px solid #000;
 }
+#sidebar .notice {
+	border: 0;
+}
+#sidebar .notice p {
+	font-size: 0.9em;
+}
 #sidebar ul li a:link,
 #sidebar ul li a:visited {
 	background: #FFF;
