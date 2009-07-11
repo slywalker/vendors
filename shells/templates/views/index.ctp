@@ -5,19 +5,20 @@
 		<p>
 <?php
 echo "\t\t\t<?php
-echo \$paginator->counter(array(
-'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
-));
+\t\t\techo \$paginator->counter(array(
+\t\t\t\t'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
+\t\t\t));
 ?>";
 ?>
 		</p>
+		<p><?php echo "<?php echo \$appPaginator->limit();?>";?></p>
 		<table>
 <?php
 echo "\t\t\t<?php\n";
 echo "\t\t\t\$th = array();\n";
-echo "\t\t\t\$th[] = __('Delete', true);\n";
+echo "\t\t\t\$th[] = __('Del', true);\n";
 foreach ($fields as $field) {
-	echo "\t\t\t\$th[] = \$paginator->sort('{$field}');\n";
+	echo "\t\t\t\$th[] = \$appPaginator->sort('{$field}');\n";
 }
 echo "\t\t\t\$th[] = __('Actions', true);\n";
 echo "\t\t\techo \$html->tableHeaders(\$th);\n";
