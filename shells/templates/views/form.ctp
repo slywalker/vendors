@@ -18,14 +18,14 @@ if (!empty($associations['hasAndBelongsToMany'])) {
 	}
 }
 echo "\t\t));\n";
-echo "\t\techo \$form->end('Submit');\n";
+echo "\t\techo \$form->end(__('Submit', true));\n";
 echo "\t\t?>\n";
 ?>
 	</div>
 </div>
 <div id="sidebar">
 	<div class="block">
-		<h3><?php echo __('Actions');?></h3>
+		<h3><?php echo "<?php echo __('Actions');?>";?></h3>
 <?php
 echo "\t\t<?php\n";
 echo "\t\t\$li = array();\n";
