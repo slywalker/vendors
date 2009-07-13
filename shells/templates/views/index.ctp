@@ -67,7 +67,7 @@ echo "\t\t\t?>\n";
 </div>
 <div id="sidebar">
 	<div class="block">
-		<h3><?php echo "<?php echo __('Actions');?>";?></h3>
+		<h3><?php echo "<?php __('Actions');?>";?></h3>
 <?php
 echo "\t\t<?php\n";
 echo "\t\t\$li = array();\n";
