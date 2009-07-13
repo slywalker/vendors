@@ -206,6 +206,7 @@ form textarea {
 	border: 1px solid #99928F;
 }
 form .description {
+	margin: 0;
 	font-style: italic;
 	color: #8c8c8c;
 	font-size: .9em;
