@@ -14,7 +14,7 @@ foreach ($fields as $field) {
 }
 if (!empty($associations['hasAndBelongsToMany'])) {
 	foreach ($associations['hasAndBelongsToMany'] as $assocName => $assocData) {
-		echo "\t\t\t'{$assocName}',\n";
+		echo "\t\t\t'{$assocName}' => array('multiple' => 'checkbox'),\n";
 	}
 }
 echo "\t\t));\n";
