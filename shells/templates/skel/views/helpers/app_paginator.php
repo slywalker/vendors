@@ -29,7 +29,8 @@ class AppPaginatorHelper extends AppHelper {
 	function sort($title, $key = null, $options = array()) {
 		if (empty($key)) {
 			$key = $this->Paginator->defaultModel().'.'.$title;
-			$title = __(Inflector::humanize(preg_replace('/_id$/', '', $title)), true);
+			$title = preg_replace('/_id$/', '', $title);
+			$title = __(Inflector::humanize($title), true);
 		}
 		$sortKey = $this->Paginator->sortKey();
 		$sortDir = $this->Paginator->sortDir();
