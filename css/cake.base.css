@@ -60,7 +60,7 @@ table td.last{text-align:right;}
 /* forms */
 input.checkbox{margin:0;padding:0;}
 form .input{clear:both;margin-bottom:15px;}
-form div.left{width:20%;float:left;}
+form div.left{float:left;}
 form div.right{width:75%;float:right;}
 form .columns .column{width:48%;}
 form .columns .left{float:left;}
