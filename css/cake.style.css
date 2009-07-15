@@ -229,7 +229,8 @@ form .error-message {
 	color: #cd0a0a;
 	font-weight: bold;
 }
-form input[type=submit] {
+form input[type=submit],
+.button {
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	background: #eee;
