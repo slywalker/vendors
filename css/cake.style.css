@@ -55,7 +55,7 @@ dl dd {
 	color: #FFF;
 }
 #user-navigation {
-	top: auto;
+	top: 5px;
 	bottom: 50px;
 	right: 50px;
 }
