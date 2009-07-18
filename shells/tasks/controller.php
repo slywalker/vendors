@@ -259,12 +259,12 @@ class ControllerTask extends Shell {
 		$singularHumanName = Inflector::humanize($currentModelName);
 		$pluralHumanName = Inflector::humanize($controllerName);
 		$actions .= "\n";
-		$actions .= "\tfunction {$admin}index() {\n";
+		$actions .= "\tpublic function {$admin}index() {\n";
 		$actions .= "\t\t\$this->{$currentModelName}->recursive = 0;\n";
 		$actions .= "\t\t\$this->set('{$pluralName}', \$this->paginate());\n";
 		$actions .= "\t}\n";
 		$actions .= "\n";
-		$actions .= "\tfunction {$admin}view(\$id = null) {\n";
+		$actions .= "\tpublic function {$admin}view(\$id = null) {\n";
 		$actions .= "\t\tif (!\$id) {\n";
 		if ($wannaUseSession) {
 			$actions .= "\t\t\t\$this->Session->setFlash(__('Invalid {$singularHumanName}', true));\n";
@@ -279,7 +279,7 @@ class ControllerTask extends Shell {
 
 		/* ADD ACTION */
 		$compact = array();
-		$actions .= "\tfunction {$admin}add() {\n";
+		$actions .= "\tpublic function {$admin}add() {\n";
 		$actions .= "\t\tif (\$this->data) {\n";
 		$actions .= "\t\t\t\$this->{$currentModelName}->create();\n";
 		$actions .= "\t\t\tif (\$this->{$currentModelName}->save(\$this->data)) {\n";
@@ -320,7 +320,7 @@ class ControllerTask extends Shell {
 
 		/* EDIT ACTION */
 		$compact = array();
-		$actions .= "\tfunction {$admin}edit(\$id = null) {\n";
+		$actions .= "\tpublic function {$admin}edit(\$id = null) {\n";
 		$actions .= "\t\tif (!\$id && !\$this->data) {\n";
 		if ($wannaUseSession) {
 			$actions .= "\t\t\t\$this->Session->setFlash(__('Invalid {$singularHumanName}', true));\n";
@@ -368,7 +368,7 @@ class ControllerTask extends Shell {
 		}
 		$actions .= "\t}\n";
 		$actions .= "\n";
-		$actions .= "\tfunction {$admin}delete(\$id = null) {\n";
+		$actions .= "\tpublic function {$admin}delete(\$id = null) {\n";
 		$actions .= "\t\tif (!\$id) {\n";
 		$actions .= "\t\t\tif (isset(\$this->data['delete'])) {\n";
 		$actions .= "\t\t\t\tif (\$this->{$currentModelName}->deleteAll(array('{$currentModelName}.id' => \$this->data['delete']))) {\n";
@@ -471,11 +471,11 @@ class ControllerTask extends Shell {
 		$out .= "\tpublic \$autoRender = false;\n}\n\n";
 		$out .= "class {$className}ControllerTest extends CakeTestCase {\n";
 		$out .= "\tpublic \${$className} = null;\n\n";
-		$out .= "\tfunction startTest() {\n\t\t\$this->{$className} = new Test{$className}();";
+		$out .= "\tpublic function startTest() {\n\t\t\$this->{$className} = new Test{$className}();";
 		$out .= "\n\t\t\$this->{$className}->constructClasses();\n\t}\n\n";
-		$out .= "\tfunction test{$className}ControllerInstance() {\n";
+		$out .= "\tpublic function test{$className}ControllerInstance() {\n";
 		$out .= "\t\t\$this->assertTrue(is_a(\$this->{$className}, '{$className}Controller'));\n\t}\n\n";
-		$out .= "\tfunction endTest() {\n\t\tunset(\$this->{$className});\n\t}\n}\n";
+		$out .= "\tpublic function endTest() {\n\t\tunset(\$this->{$className});\n\t}\n}\n";
 
 		$path = CONTROLLER_TESTS;
 		if (isset($this->plugin)) {

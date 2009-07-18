@@ -709,13 +709,13 @@ class ModelTask extends Shell {
 			$out .= "class {$className}TestCase extends CakeTestCase {\n";
 			$out .= "\tpublic \${$className} = null;\n";
 			$out .= "\tpublic \$fixtures = array($fixture);\n\n";
-			$out .= "\tfunction startTest() {\n";
+			$out .= "\tpublic function startTest() {\n";
 			$out .= "\t\t\$this->{$className} =& ClassRegistry::init('{$className}');\n";
 			$out .= "\t}\n\n";
-			$out .= "\tfunction test{$className}Instance() {\n";
+			$out .= "\tpublic function test{$className}Instance() {\n";
 			$out .= "\t\t\$this->assertTrue(is_a(\$this->{$className}, '{$className}'));\n";
 			$out .= "\t}\n\n";
-			$out .= "\tfunction test{$className}Find() {\n";
+			$out .= "\tpublic function test{$className}Find() {\n";
 			$out .= "\t\t\$this->{$className}->recursive = -1;\n";
 			$out .= "\t\t\$results = \$this->{$className}->find('first');\n\t\t\$this->assertTrue(!empty(\$results));\n\n";
 			$out .= "\t\t\$expected = array('$className' => array(\n$results\n\t\t));\n";
