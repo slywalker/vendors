@@ -182,11 +182,11 @@ class AccountsController extends AppController {
 
 	private function _sendMail($to, $subject, $template = 'default') {
 		$params = array(
-			'host'=>'smtp.kagoya.net',
+			'host'=>'smtp.yourserver',
 			'port'=>587,
-			'from'=>'info@slywalker.net',
-			'user'=>'slywalker',
-			'pass'=>'akwhgezk',
+			'from'=>'info@yourdomain',
+			'user'=>'user',
+			'pass'=>'pass',
 			'protocol'=>'SMTP_AUTH',
 		);
 		$this->Qdmail->smtp(true);

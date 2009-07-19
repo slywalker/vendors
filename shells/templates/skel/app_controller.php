@@ -1,41 +1,24 @@
 <?php
-/* SVN FILE: $Id: app_controller.php 7805 2008-10-30 17:30:26Z AD7six $ */
-/**
- * Short description for file.
- *
- * This file is application-wide controller file. You can put all
- * application-wide controller-related methods here.
- *
- * PHP versions 4 and 5
- *
- * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
- * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
- * @filesource
- * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
- * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
- * @package       cake
- * @subpackage    cake.app
- * @since         CakePHP(tm) v 0.2.9
- * @version       $Revision: 7805 $
- * @modifiedby    $LastChangedBy: AD7six $
- * @lastmodified  $Date: 2008-10-31 02:30:26 +0900 (Fri, 31 Oct 2008) $
- * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
- */
-/**
- * Short description for class.
- *
- * Add your application-wide methods in the class below, your controllers
- * will inherit them.
- *
- * @package       cake
- * @subpackage    cake.app
- */
 class AppController extends Controller {
-	public $components = array('DebugKit.Toolbar');
+	public $components = array(
+		'Auth',
+		'DebugKit.Toolbar',
+	);
 	public $helpers = array('AppPaginator');
+	
+	public function beforeFilter() {
+		if (isset($this->Auth)) {
+			$this->_authSettings();
+		}
+	}
+
+	private function _authSettings() {
+		if (isset($this->data['Account']['raw_password'])) {
+			$this->data['Account']['password'] = $this->data['Account']['raw_password'];
+		}
+		$this->Auth->userModel = 'Account';
+		$this->Auth->fields = array('username' => 'email', 'password' => 'password');
+		$this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'home');
+	}
 }
 ?>
