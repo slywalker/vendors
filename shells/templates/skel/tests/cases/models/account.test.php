@@ -22,7 +22,7 @@ class AccountTestCase extends CakeTestCase {
 
 		$expected = array('Account' => array(
 			'id'  => 1,
-			'name'  => 1,
+			'name'  => 'Lorem ipsum dolor sit amet',
 			'email'  => 'Lorem ipsum dolor sit amet',
 			'password'  => 'Lorem ipsum dolor sit amet',
 			'expires'  => '2009-07-18 21:40:02',
