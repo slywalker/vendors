@@ -23,7 +23,7 @@ class AccountTestCase extends CakeTestCase {
 		$expected = array('Account' => array(
 			'id'  => 1,
 			'name'  => 'Lorem ipsum dolor sit amet',
-			'email'  => 'Lorem ipsum dolor sit amet',
+			'email'  => 'foo@hoge.hage',
 			'password'  => 'Lorem ipsum dolor sit amet',
 			'expires'  => '2009-07-18 21:40:02',
 			'email_checkcode'  => 'Lorem ipsum dolor sit amet',
@@ -38,7 +38,16 @@ class AccountTestCase extends CakeTestCase {
 		// メールアドレスバリデーションで失敗
 		$data = array('Account' => array(
 			'id' => 1,
-			'email' => 'Lorem ipsum dolor sit amet',
+			'email' => 'foo',
+		));
+		$results = $this->Account->changeEmail($data);
+		$this->assertIdentical($results, false);
+		// 同一メールアドレスで失敗
+		$this->Account->create();
+		$this->Account->saveField('email', 'bar@hoge.hage');
+		$data = array('Account' => array(
+			'id' => 1,
+			'email' => 'bar@hoge.hage',
 		));
 		$results = $this->Account->changeEmail($data);
 		$this->assertIdentical($results, false);
@@ -53,9 +62,9 @@ class AccountTestCase extends CakeTestCase {
 		$emailCheckcode = $results['Account']['email_checkcode'];
 		// データが置き換わっているか確認
 		$this->Account->recursive = -1;
-		$results = $this->Account->find('first');
+		$results = $this->Account->find('first', array('Account.id' => 1));
 		$this->assertTrue(!empty($results));
-		$this->assertIdentical($results['Account']['email'], 'Lorem ipsum dolor sit amet');
+		$this->assertIdentical($results['Account']['email'], 'foo@hoge.hage');
 		$this->assertIdentical($results['Account']['email_tmp'], $data['Account']['email']);
 		// 確認テスト
 		$results = $this->Account->confirmEmail('Lorem ipsum dolor sit amet');
@@ -72,23 +81,21 @@ class AccountTestCase extends CakeTestCase {
 		$results = $this->Account->forgotPassword('not_exist_email');
 		$this->assertIdentical($results, false);
 
-		$results = $this->Account->forgotPassword('Lorem ipsum dolor sit amet');
+		$results = $this->Account->forgotPassword('foo@hoge.hage');
 		$this->assertTrue(!empty($results));
 	}
 
 	function testAccountRegisterAndConfirmRegister() {
 		// メールアドレスバリデーションで失敗
 		$data = array('Account' => array(
-			'id' => 1,
 			'name' => 'Lorem ipsum dolor sit amet',
-			'email' => 'Lorem ipsum dolor sit amet',
+			'email' => 'foo',
 			'password' => 'Lorem ipsum dolor sit amet',
 		));
 		$results = $this->Account->register($data);
 		$this->assertIdentical($results, false);
 		// 成功
 		$data = array('Account' => array(
-			'id'  => 1,
 			'name' => 'test',
 			'email'  => 'slywalker.net@gmail.com',
 			'password' => 'pass',

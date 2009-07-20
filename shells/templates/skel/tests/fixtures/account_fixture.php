@@ -19,7 +19,7 @@ class AccountFixture extends CakeTestFixture {
 	public $records = array(array(
 		'id'  => 1,
 		'name'  => 'Lorem ipsum dolor sit amet',
-		'email'  => 'Lorem ipsum dolor sit amet',
+		'email'  => 'foo@hoge.hage',
 		'password'  => 'Lorem ipsum dolor sit amet',
 		'expires'  => '2009-07-18 21:40:02',
 		'email_checkcode'  => 'Lorem ipsum dolor sit amet',
