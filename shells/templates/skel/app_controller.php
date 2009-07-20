@@ -19,6 +19,7 @@ class AppController extends Controller {
 		$this->Auth->userModel = 'Account';
 		$this->Auth->fields = array('username' => 'email', 'password' => 'password');
 		$this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'home');
+		$this->Auth->userScope = array('Account.disabled' => 0);
 	}
 }
 ?>
