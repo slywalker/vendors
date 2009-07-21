@@ -24,7 +24,7 @@ class Account extends AppModel {
 				'rule' => array('email'),
 			),
 		),
-		'raw_password' => array(
+		'password' => array(
 			array(
 				'rule' => array('checkCompare', '_confirm'),
 				'message' => 'This field is differ with confirm',
@@ -33,7 +33,7 @@ class Account extends AppModel {
 				'rule' => array('notEmpty'),
 			),
 		),
-		'password' => array('notempty'),
+		'hash_password' => array('notempty'),
 		//'email_checkcode' => array('notempty'),
 		//'password_checkcode' => array('notempty'),
 		'disabled' => array('numeric'),

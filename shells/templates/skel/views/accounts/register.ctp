@@ -7,8 +7,8 @@
 			'name',
 			'email',
 			'email_confirm',
-			'raw_password' => array('type' => 'password', 'label' => __('Password', true)),
-			'raw_password_confirm' => array('type' => 'password', 'label' => __('Password Confirm', true)),
+			'password',
+			'password_confirm' => array('type' => 'password', 'label' => __('Password Confirm', true)),
 		));
 		echo $form->end(__('Submit', true));
 		?>

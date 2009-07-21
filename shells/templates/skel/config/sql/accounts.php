@@ -13,7 +13,7 @@ class AccountsSchema extends CakeSchema {
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'primary'),
 		'name' => array('type' => 'string', 'null' => false, 'default' => NULL),
 		'email' => array('type' => 'string', 'null' => false, 'default' => NULL),
-		'password' => array('type' => 'string', 'null' => false, 'default' => NULL),
+		'hash_password' => array('type' => 'string', 'null' => false, 'default' => NULL),
 		'expires' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
 		'email_checkcode' => array('type' => 'string', 'null' => false, 'default' => NULL),
 		'password_checkcode' => array('type' => 'string', 'null' => false, 'default' => NULL),

@@ -13,11 +13,11 @@ class AppController extends Controller {
 	}
 
 	private function _authSettings() {
-		if (isset($this->data['Account']['raw_password'])) {
-			$this->data['Account']['password'] = $this->data['Account']['raw_password'];
+		if (isset($this->data['Account']['password'])) {
+			$this->data['Account']['hash_password'] = $this->data['Account']['password'];
 		}
 		$this->Auth->userModel = 'Account';
-		$this->Auth->fields = array('username' => 'email', 'password' => 'password');
+		$this->Auth->fields = array('username' => 'email', 'password' => 'hash_password');
 		$this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'home');
 		$this->Auth->userScope = array('Account.disabled' => 0);
 	}

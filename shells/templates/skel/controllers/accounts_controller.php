@@ -166,7 +166,7 @@ class AccountsController extends AppController {
 			$this->redirect(array('action'=>'login'));
 		}
 		if ($this->data) {
-			$this->data['Account']['password'] = $this->Auth->password($this->data['Account']['raw_password']);
+			$this->data['Account']['hash_password'] = $this->Auth->password($this->data['Account']['password']);
 			$this->Account->begin();
 			if ($account = $this->Account->save($this->data)) {
 				$this->Account->commit();
