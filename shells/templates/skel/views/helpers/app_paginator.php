@@ -35,7 +35,8 @@ class AppPaginatorHelper extends AppHelper {
 		$sortKey = $this->Paginator->sortKey();
 		$sortDir = $this->Paginator->sortDir();
 		if ($key === $sortKey) {
-			$title .= ($sortDir === 'asc') ? '↑': '↓';
+			$title .= ($sortDir === 'asc') ? '<span class="asc">↑</span>': '<span class="desc">↓</span>';
+			$options = am($options, array('escape' => false));
 		}
 		return $this->Paginator->sort($title, $key, $options);
 	}
