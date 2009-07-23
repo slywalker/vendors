@@ -12,45 +12,44 @@ echo "\t\t\t<?php
 ?>
 		</p>
 		<p><?php echo "<?php echo \$appPaginator->limit();?>";?></p>
-		<table>
+		<div class="content">
 <?php
 echo "\t\t\t<?php\n";
-echo "\t\t\t\$th = array();\n";
-echo "\t\t\t\$th[] = __('Del', true);\n";
-foreach ($fields as $field) {
-	echo "\t\t\t\$th[] = \$appPaginator->sort('{$field}');\n";
-}
-echo "\t\t\t\$th[] = __('Actions', true);\n";
-echo "\t\t\techo \$html->tableHeaders(\$th);\n";
-
+echo "\t\t\t\$li = array();\n";
 echo "\t\t\tforeach (\${$pluralVar} as \$key => \${$singularVar}) {\n";
-echo "\t\t\t\t\$td = array();\n";
-echo "\t\t\t\t\$td[] = \$form->checkbox('delete.'.\$key, array('value' => \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
+echo "\t\t\t\t\$left = \$form->checkbox('delete.'.\$key, array('value' => \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
+echo "\t\t\t\t\$left = \$html->div('left', \$left);\n";
+echo "\t\t\t\t\$items = array();\n";
 foreach ($fields as $field) {
 	$isKey = false;
 	if (!empty($associations['belongsTo'])) {
 		foreach ($associations['belongsTo'] as $alias => $details) {
 			if ($field === $details['foreignKey']) {
 				$isKey = true;
-				echo "\t\t\t\t\$td[] = \$html->link(\${$singularVar}['{$alias}']['{$details['displayField']}'], array('controller' => '{$details['controller']}', 'action' => 'view', \${$singularVar}['{$alias}']['{$details['primaryKey']}']));\n";
+				echo "\t\t\t\t\$items[] = \$html->link(\${$singularVar}['{$alias}']['{$details['displayField']}'], array('controller' => '{$details['controller']}', 'action' => 'view', \${$singularVar}['{$alias}']['{$details['primaryKey']}']), array('class' => '{$field}'));\n";
 				break;
 			}
 		}
 	}
 	if ($isKey !== true) {
-		echo "\t\t\t\t\$td[] = h(\${$singularVar}['{$modelClass}']['{$field}']);\n";
+		echo "\t\t\t\t\$items[] = \$html->tag('span', h(\${$singularVar}['{$modelClass}']['{$field}']), array('class' => '{$field}'));\n";
 	}
 }
+
 echo "\t\t\t\t\$actions = array();\n";
 echo "\t\t\t\t\$actions[] = \$html->link(__('View', true), array('action' => 'view', \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
 echo "\t\t\t\t\$actions[] = \$html->link(__('Edit', true), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
 echo "\t\t\t\t\$actions[] = \$html->link(__('Delete', true), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), null, sprintf(__('Are you sure you want to delete # %s?', true), \${$singularVar}['{$modelClass}']['{$primaryKey}']));\n";
-echo "\t\t\t\t\$td[] = array(implode('&nbsp;|&nbsp;', \$actions), array('class' => 'actions'));\n";
-echo "\t\t\t\techo \$html->tableCells(\$td, array('class' => 'altrow'));\n";
+echo "\t\t\t\t\$items[] = \$html->tag('span', implode('&nbsp;|&nbsp;', \$actions), array('class' => 'actions'));\n";
+
+echo "\t\t\t\t\$item = \$html->para(null, implode('<br />', \$items));\n";
+echo "\t\t\t\t\$item = \$html->div('item', \$item);\n";
+echo "\t\t\t\t\$li[] = \$left.\$item;\n";
 echo "\t\t\t}\n";
+echo "\t\t\techo \$html->nestedList(\$li, array('class' => 'list'));\n";
 echo "\t\t\t?>\n";
 ?>
-		</table>
+		</div>
 	</div>
 	<div class="actions-bar">
 		<div class="actions">
