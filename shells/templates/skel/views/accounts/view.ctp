@@ -4,7 +4,6 @@
 		<dl>
 			<?php
 			$lists = array();
-			$lists[] = array('dt' => __('Id', true), 'dd' => h($account['Account']['id']));
 			$lists[] = array('dt' => __('Name', true), 'dd' => h($account['Account']['name']));
 			$lists[] = array('dt' => __('Email', true), 'dd' => h($account['Account']['email']));
 			foreach ($lists as $key => $list) {
