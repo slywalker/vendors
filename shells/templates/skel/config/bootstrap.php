@@ -52,6 +52,8 @@
 	if ('On' === env('HTTP_DEBUG')) {
 		Configure::write('debug', 2);
 	}
+	Configure::write('Routing.admin', 'admin');
+	Configure::write('Security.level', 'medium');
 /**
  * The settings below can be used to set additional paths to models, views and controllers.
  * This is related to Ticket #470 (https://trac.cakephp.org/ticket/470)

@@ -83,7 +83,7 @@ class AccountsController extends AppController {
 			if ($account = $this->Account->register($this->data)) {
 				// sendmail
 				$this->set(compact('account'));
-				if ($this->_sendMail($account['Account']['email'], 'Confirm Register', 'confirm_register')) {
+				if ($this->_send($account['Account']['email'], 'Confirm Register', 'confirm_register')) {
 					$this->Account->commit();
 					$this->Session->setFlash(__('A confirm mail has been sent', true), 'default', array('class' => 'message success'));
 					$this->redirect(array('action'=>'login'));
@@ -100,7 +100,7 @@ class AccountsController extends AppController {
 			if ($account = $this->Account->forgotPassword($this->data['Account']['email'])) {
 				// sendmail
 				$this->set(compact('account'));
-				if ($this->_sendMail($account['Account']['email'], 'Change Password', 'forgot_password')) {
+				if ($this->_send($account['Account']['email'], 'Change Password', 'forgot_password')) {
 					$this->Account->commit();
 					$this->Session->setFlash(__('A confirm mail has been sent', true), 'default', array('class' => 'message success'));
 					$this->redirect(array('action'=>'login'));
@@ -142,7 +142,7 @@ class AccountsController extends AppController {
 			if ($account = $this->Account->changeEmail($this->data)) {
 				// sendmail
 				$this->set(compact('account'));
-				if ($this->_sendMail($account['Account']['email'], 'Confirm Email', 'confirm_email')) {
+				if ($this->_send($account['Account']['email'], 'Confirm Email', 'confirm_email')) {
 					$this->Account->commit();
 					$this->Session->setFlash(__('A confirm mail has been sent', true), 'default', array('class' => 'message success'));
 					$this->redirect(array('action'=>'login'));
@@ -179,30 +179,5 @@ class AccountsController extends AppController {
 			$this->data = $this->Account->read(null, $id);
 		}
 	}
-
-	private function _sendMail($to, $subject, $template = 'default') {
-		$params = array(
-			'host'=>'smtp.yourserver',
-			'port'=>587,
-			'from'=>'info@yourdomain',
-			'user'=>'user',
-			'pass'=>'pass',
-			'protocol'=>'SMTP_AUTH',
-		);
-		$this->Qdmail->smtp(true);
-		$this->Qdmail->smtpServer($params);
-		//$this->Qdmail->debug(2);
-		$this->Qdmail->to($to);
-		$this->Qdmail->from('noreplay@'.env('HTTP_HOST'));
-		$this->Qdmail->subject($subject);
-		
-		$view = $this->view;
-		$this->view = 'View';
-		$this->Qdmail->cakeText(null, $template, null, null, 'iso-2022-jp');
-		$this->view = $view;
-		
-		return $this->Qdmail->send();
-	}
-
 }
 ?>

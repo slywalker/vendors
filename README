@@ -1,8 +1,18 @@
-// Skel指定方法
+Skel指定方法
 $ cake bake project -skel /your/vendors/shells/templates/skel myapp
+上記のskelにはユーザ認証の機能がついています
+テーブル作成
+$ cake schema run create accounts
 
-// リスト形式のindexテンプレートの使用方法
+メール送信にToolKitプラグインに入っているQdmail,Qdsmtpを使用しています
+smtpの設定 config/smtp.php.defaultを元にconfig/smtp.phpを作成
+
+AdminRoutingはBasicAuthを使っています
+ユーザ、パスワードの設定
+config/basic.php.defaultを元にconfig/basic.phpを作成
+
+リスト形式のindexテンプレートの使用方法
 $ cake bake view [controllerName] list_index index
 
-// ボックス形式のindexテンプレートの使用方法
+ボックス形式のindexテンプレートの使用方法
 $ cake bake view [controllerName] box_index index
