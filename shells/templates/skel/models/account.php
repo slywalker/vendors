@@ -9,6 +9,7 @@ class Account extends AppModel {
 			),
 			array(
 				'rule' => array('notEmpty'),
+				'message' => 'This field is required',
 			),
 		),
 		'email' => array(
@@ -22,6 +23,7 @@ class Account extends AppModel {
 			),
 			array(
 				'rule' => array('email'),
+				'message' => 'This field needs email format',
 			),
 		),
 		'password' => array(
@@ -31,13 +33,16 @@ class Account extends AppModel {
 			),
 			array(
 				'rule' => array('notEmpty'),
+				'message' => 'This field is required',
 			),
 		),
-		'hash_password' => array('notempty'),
-		//'email_checkcode' => array('notempty'),
-		//'password_checkcode' => array('notempty'),
+		'hash_password' => array(
+			'rule' => 'notempty',
+			'message' => 'This field is required',
+		),
 		'disabled' => array('numeric'),
 	);
+	private $_expires = '+1 hour';
 
 	public function register($data) {
 		// 期限切れregister削除
@@ -50,7 +55,7 @@ class Account extends AppModel {
 		// データ追加
 		$data[$this->alias]['email_checkcode'] = String::uuid();
 		$data[$this->alias]['disabled'] = 1;
-		$data[$this->alias]['expires'] = date('Y-m-d H:i:s', strtotime('now '.$expires));
+		$data[$this->alias]['expires'] = date('Y-m-d H:i:s', strtotime('now '.$this->_expires));
 		$this->create();
 		return $this->save($data);
 	}
@@ -66,7 +71,7 @@ class Account extends AppModel {
 				'id' => $data[$this->alias]['id'],
 				'email_tmp' => $data[$this->alias]['email'],
 				'email_checkcode' => String::uuid(),
-				'expires' => date('Y-m-d H:i:s', strtotime('now '.$expires)),
+				'expires' => date('Y-m-d H:i:s', strtotime('now '.$this->_expires)),
 			),
 		);
 		return $this->save($_data, false, array('id', 'email_tmp', 'email_checkcode', 'expires'));
@@ -85,7 +90,7 @@ class Account extends AppModel {
 				'id' => $data[$this->alias]['id'],
 				'email' => $data[$this->alias]['email'],
 				'password_checkcode' => String::uuid(),
-				'expires' => date('Y-m-d H:i:s', strtotime('now '.$expires)),
+				'expires' => date('Y-m-d H:i:s', strtotime('now '.$this->_expires)),
 			),
 		);
 		return $this->save($_data, false, array('id', 'email', 'password_checkcode', 'expires'));

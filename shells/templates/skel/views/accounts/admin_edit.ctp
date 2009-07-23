@@ -3,10 +3,16 @@
 		<?php
 		echo $form->create('Account');
 		echo $form->inputs(array(
-			'legend' => __('Add Account', true),
+			'legend' => __('Edit Account', true),
+			'id',
 			'name',
 			'email',
 			'password',
+			'expires' => array('dateFormat' => 'YMD', 'timeFormat' => '24'),
+			'email_checkcode',
+			'password_checkcode',
+			'disabled',
+			'email_tmp',
 		));
 		echo $form->end(__('Submit', true));
 		?>
@@ -17,6 +23,7 @@
 		<h3><?php __('Actions');?></h3>
 		<?php
 		$li = array();
+		$li[] =$html->link(__('Delete', true), array('action' => 'delete', $form->value('Account.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $form->value('Account.id')));
 		$li[] = $html->link(__('List Accounts', true), array('action' => 'index'));
 		echo $html->nestedList($li, array('class'=>'navigation'));
 		?>

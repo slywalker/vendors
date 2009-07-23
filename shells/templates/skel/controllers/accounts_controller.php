@@ -1,23 +1,22 @@
 <?php
 class AccountsController extends AppController {
 	public $name = 'Accounts';
-	public $components = array('ToolKit.Qdmail', 'ToolKit.Qdsmtp');
-	private $_id = null;
+	private $__account_id = null;
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		if (isset($this->Auth)) {
-			$this->Auth->allow('register', 'forgot_password', 'confirm_register', 'confirm_email', 'change_password');
-			$this->_id = $this->Auth->user('id');
-		}
+		$this->__account_id = $this->Auth->user('id');
 	}
 
-	public function index() {
+	public function admin_index() {
 		$this->Account->recursive = 0;
 		$this->set('accounts', $this->paginate());
 	}
 
 	public function view($id = null) {
+		if (is_null($id)) {
+			$id = $this->__account_id;
+		}
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid Account', true));
 			$this->redirect(array('action'=>'index'));
@@ -25,7 +24,15 @@ class AccountsController extends AppController {
 		$this->set('account', $this->Account->read(null, $id));
 	}
 
-	public function add() {
+	public function admin_view($id = null) {
+		if (!$id) {
+			$this->Session->setFlash(__('Invalid Account', true));
+			$this->redirect(array('action'=>'index'));
+		}
+		$this->set('account', $this->Account->read(null, $id));
+	}
+
+	public function admin_add() {
 		if ($this->data) {
 			$this->Account->create();
 			if ($this->Account->save($this->data)) {
@@ -37,7 +44,7 @@ class AccountsController extends AppController {
 		}
 	}
 
-	public function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && !$this->data) {
 			$this->Session->setFlash(__('Invalid Account', true));
 			$this->redirect(array('action'=>'index'));
@@ -67,6 +74,10 @@ class AccountsController extends AppController {
 			}
 		}
 		$this->redirect(array('action'=>'index'));
+	}
+
+	public function admin_delete($id = null) {
+		$this->delete($id);
 	}
 
 	public function login() {
@@ -132,7 +143,7 @@ class AccountsController extends AppController {
 
 
 	public function change_email() {
-		$id = $this->_id;
+		$id = $this->__account_id;
 		if (!$id && !$this->data) {
 			$this->Session->setFlash(__('Invalid Account', true));
 			$this->redirect(array('action'=>'login'));
@@ -157,7 +168,7 @@ class AccountsController extends AppController {
 
 	public function change_password($id = null) {
 		if (is_null($id)) {
-			$id = $this->_id;
+			$id = $this->__account_id;
 		} else {
 			$id = $this->Account->field('id', array('password_checkcode' => $id));
 		}
@@ -179,5 +190,6 @@ class AccountsController extends AppController {
 			$this->data = $this->Account->read(null, $id);
 		}
 	}
+
 }
 ?>
