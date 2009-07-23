@@ -1,6 +1,10 @@
 <?php
 $li = array();
-$li[] = $html->link('Sign In', array('controller' => 'accounts', 'action' => 'login'));
-$li[] = $html->link('Sign Out', array('controller' => 'accounts', 'action' => 'logout'));
+if ($session->check('Auth.Account')) {
+	$li[] = $html->link(__('Account', true), array('controller' => 'accounts', 'action' => 'view', 'admin' => false, 'plugin' => false));
+	$li[] = $html->link(__('Sign Out', true), array('controller' => 'accounts', 'action' => 'logout', 'admin' => false));
+} else {
+	$li[] = $html->link(__('Sign In', true), array('controller' => 'accounts', 'action' => 'login', 'admin' => false, 'plugin' => false));
+}
 echo $html->nestedList($li);
 ?>
