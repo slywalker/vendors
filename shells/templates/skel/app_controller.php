@@ -30,21 +30,23 @@ class AppController extends Controller {
 	}
 
 	private function __adminSettings() {
-		config('basic');
-		$Basic = new BASIC_CONFIG;
-		$users = $Basic->default;
-		$this->Security->loginOptions = array('type'=>'basic');
-		$this->Security->loginUsers = $users;
-		$this->Security->requireLogin('*');
-		$this->Auth->allow('*');
+		if (config('basic')) {
+			$Basic = new BASIC_CONFIG;
+			$users = $Basic->default;
+			$this->Security->loginOptions = array('type'=>'basic');
+			$this->Security->loginUsers = $users;
+			$this->Security->requireLogin('*');
+			$this->Auth->allow('*');
+		}
 	}
 
 	protected function _send($to, $subject, $template = 'default') {
-		config('smtp');
-		$Smtp = new SMTP_CONFIG;
-		$params = $Smtp->default;
-		$this->Qdmail->smtp(true);
-		$this->Qdmail->smtpServer($params);
+		if (config('smtp')) {
+			$Smtp = new SMTP_CONFIG;
+			$params = $Smtp->default;
+			$this->Qdmail->smtp(true);
+			$this->Qdmail->smtpServer($params);
+		}
 		//$this->Qdmail->debug(2);
 		$this->Qdmail->to($to);
 		$this->Qdmail->from('noreplay@'.env('HTTP_HOST'));
