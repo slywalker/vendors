@@ -26,7 +26,8 @@ class AppController extends Controller {
 		$this->Auth->userScope = array('Account.disabled' => 0);
 		$this->Auth->allow('*');
 		$this->Auth->deny('add', 'edit', 'delete');
-		Configure::write('Auth', $this->Auth->fields);
+		$account = $this->Auth->user();
+		Configure::write('Auth', $account['Account']);
 	}
 
 	private function __adminSettings() {
