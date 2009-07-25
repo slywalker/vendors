@@ -32,8 +32,7 @@ class AppController extends Controller {
 
 	private function __adminSettings() {
 		if (config('basic')) {
-			$Basic = new BASIC_CONFIG;
-			$users = $Basic->default;
+			$users = BASIC_CONFIG::$default;
 			$this->Security->loginOptions = array('type'=>'basic');
 			$this->Security->loginUsers = $users;
 			$this->Security->requireLogin('*');
@@ -43,8 +42,7 @@ class AppController extends Controller {
 
 	protected function _send($to, $subject, $template = 'default') {
 		if (config('smtp')) {
-			$Smtp = new SMTP_CONFIG;
-			$params = $Smtp->default;
+			$params = SMTP_CONFIG::$default;
 			$this->Qdmail->smtp(true);
 			$this->Qdmail->smtpServer($params);
 		}

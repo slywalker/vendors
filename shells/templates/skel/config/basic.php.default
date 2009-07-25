@@ -1,7 +1,7 @@
 <?php
 class BASIC_CONFIG {
 
-	var $default = array(
+	static $default = array(
 		'admin' => 'pass',
 	);
 }

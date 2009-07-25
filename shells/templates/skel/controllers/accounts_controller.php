@@ -17,11 +17,13 @@ class AccountsController extends AppController {
 		if (is_null($id)) {
 			$id = $this->__account_id;
 		}
-		if (!$id) {
+		$conditions = array('Account.id' => $id);
+		$account = $this->Account->find('first', compact('conditions'))
+		if (!$account) {
 			$this->Session->setFlash(__('Invalid Account', true));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action'=>'logout'));
 		}
-		$this->set('account', $this->Account->read(null, $id));
+		$this->set(compact('account'));
 	}
 
 	public function admin_view($id = null) {
@@ -61,7 +63,17 @@ class AccountsController extends AppController {
 		}
 	}
 
-	public function delete($id = null) {
+	public function delete() {
+		$id = $this->__account_id;
+		if (!$id) {
+			if ($this->Account->delete($id)) {
+				$this->Session->setFlash(__('Account deleted', true), 'default', array('class' => 'message success'));
+			}
+		}
+		$this->redirect(array('action'=>'view'));
+	}
+
+	public function admin_delete($id = null) {
 		if (!$id) {
 			if (isset($this->data['delete'])) {
 				if ($this->Account->deleteAll(array('Account.id' => $this->data['delete']))) {
@@ -74,10 +86,6 @@ class AccountsController extends AppController {
 			}
 		}
 		$this->redirect(array('action'=>'index'));
-	}
-
-	public function admin_delete($id = null) {
-		$this->delete($id);
 	}
 
 	public function login() {
@@ -127,7 +135,7 @@ class AccountsController extends AppController {
 		if ($this->Account->confirmRegister($emailCheckcode)) {
 			$this->Session->setFlash(__('Confirm has been success', true), 'default', array('class' => 'message success'));
 		} else {
-			$this->Session->setFlash(__('Confirm could not be success. Please, try again.', true));
+			$this->Session->setFlash(__('Invalid URL', true));
 		}
 		$this->redirect(array('action'=>'login'));
 	}
@@ -136,7 +144,7 @@ class AccountsController extends AppController {
 		if ($this->Account->confirmEmail($emailCheckcode)) {
 			$this->Session->setFlash(__('Confirm has been success', true), 'default', array('class' => 'message success'));
 		} else {
-			$this->Session->setFlash(__('Confirm could not be success. Please, try again.', true));
+			$this->Session->setFlash(__('Invalid URL', true));
 		}
 		$this->redirect(array('action'=>'login'));
 	}
@@ -173,13 +181,13 @@ class AccountsController extends AppController {
 			$id = $this->Account->field('id', array('password_checkcode' => $id));
 		}
 		if (!$id && !$this->data) {
-			$this->Session->setFlash(__('Invalid Account', true));
+			$this->Session->setFlash(__('Invalid URL', true));
 			$this->redirect(array('action'=>'login'));
 		}
 		if ($this->data) {
 			$this->data['Account']['hash_password'] = $this->Auth->password($this->data['Account']['password']);
 			$this->Account->begin();
-			if ($account = $this->Account->save($this->data)) {
+			if ($account = $this->Account->changePassword($this->data)) {
 				$this->Account->commit();
 				$this->Session->setFlash(__('The Password has been changed', true), 'default', array('class' => 'message success'));
 				$this->redirect(array('action'=>'login'));

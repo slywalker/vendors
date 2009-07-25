@@ -77,6 +77,23 @@ class Account extends AppModel {
 		return $this->save($_data, false, array('id', 'email_tmp', 'email_checkcode', 'expires'));
 	}
 
+	public function changePassword($data) {
+		$this->set($data);
+		if (!$this->validates()) {
+			return false;
+		}
+		// uuid発行
+		$_data = array(
+			$this->alias => array(
+				'id' => $data[$this->alias]['id'],
+				'hash_password' => $data[$this->alias]['hash_password'],
+				'password_checkcode' => '',
+				'expires' => null,
+			),
+		);
+		return $this->save($_data, false, array('id', 'hash_password', 'password_checkcode', 'expires'));
+	}
+
 	public function forgotPassword($email) {
 		// email存在確認
 		$conditions = array($this->alias.'.email' => $email);

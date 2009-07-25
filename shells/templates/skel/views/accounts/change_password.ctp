@@ -5,8 +5,8 @@
 		echo $form->inputs(array(
 			'legend' => __('Change Password', true),
 			'id',
-			'raw_password' => array('type' => 'password', 'label' => __('Password', true)),
-			'raw_password_confirm' => array('type' => 'password', 'label' => __('Password Confirm', true)),
+			'password',
+			'password_confirm' => array('type' => 'password'),
 		));
 		echo $form->end(__('Submit', true));
 		?>
