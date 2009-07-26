@@ -14,6 +14,8 @@
 	if (Configure::read()) {
 		echo $html->css('cake.debug');
 	}
+	echo $javascript->link('jquery.js');
+	echo $javascript->codeBlock('$(function(){$("a[target=_blank]").addClass("blank");});');
 	echo $scripts_for_layout;
 	?>
 </head>

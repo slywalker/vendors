@@ -9,6 +9,7 @@ p,dl{margin:8px 0;}
 dl dt{padding-left:8px;font-weight:bold;}
 dl dd {padding-left:6em;}
 a img{border:none;}
+a.blank {background:url(../img/blank.gif) no-repeat top right;padding-right: 14px;}
 body{font-family:sans-serif;font-size:62.5％}
 #container{cursor:default;height:100%;min-width:960px;overflow:hidden;position:relative;font-size:1.2em;line-height:1.3;}
 #header{position:fixed!important;position:absolute;top:0;left:0;width:100%;z-index:1;}
