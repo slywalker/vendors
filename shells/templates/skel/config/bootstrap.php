@@ -24,20 +24,6 @@
  * @lastmodified  $Date: 2008-10-31 02:30:26 +0900 (Fri, 31 Oct 2008) $
  * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
-	function strtodate($format, $datetime = null) {
-		if (!$datetime) {
-			return date($format);
-		}
-		if (is_numeric($datetime)) {
-			return date($format, $datetime);
-		}
-		return date($format, strtotime($datetime));
-	}
-
-	function sd($format, $datetime = null) {
-		return strtodate($format, $datetime);
-	}
-	
 	function mb_trim($str) {
 		return mb_ereg_replace('^[[:space:]]*([\s\S]*?)[[:space:]]*$', '\1', $str);
 	}
