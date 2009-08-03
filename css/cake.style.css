@@ -2,6 +2,7 @@
 .gray{color:#999;}
 .hightlight{background-color:#ffc;}
 .altrow{background-color:#D2FFFF;}
+.related{margin-top:20px;}
 a:link,a:visited,a:hover,a:active,h1,h2,h3{color:#000;}
 a{-moz-outline:none;}
 body{color:#222;background:#E3E4E7;font-family:helvetica,arial,sans-serif;}
