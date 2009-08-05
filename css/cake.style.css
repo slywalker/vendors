@@ -20,16 +20,15 @@ dl dd{border-bottom:1px solid #91959D;}
 #main-navigation ul li a.active{margin-left:15px;}
 #main-navigation ul li a.active{padding:8px 15px;}
 #sidebar .block{background:#FFF;}
-#main-navigation{background:#D3CDCB;}
+#main-navigation,.secondary-navigation{background:#D3CDCB;}
 #main-navigation ul li{background:#D3CDCB;margin-right:0;}
 #main-navigation ul li a.selected{background:#99928F;}
 #main-navigation ul li a:link,#main-navigation ul li a:visited,#main-navigation ul li a:hover,#main-navigation ul li a:active,.secondary-navigation ul li a:link,.secondary-navigation ul li a:visited,.secondary-navigation ul li a:hover,.secondary-navigation ul li a:active,#user-navigation ul li a:link,#user-navigation ul li a:visited,#user-navigation ul li a:hover,#user-navigation ul li a:active{text-decoration:none;color:#FFF;}
-#main-navigation ul li a:hover{background-color:#99928F;}
-.secondary-navigation li a:hover{background:#470e0e;}
+#main-navigation ul li a:hover,.secondary-navigation li a:hover{background:#99928F;}
 #main-navigation ul li.active a:link,#main-navigation ul li.active a:visited,#main-navigation ul li.active a:hover,#main-navigation ul li.active a:active{color:#262626;}
-.secondary-navigation{margin-top:20px;padding:0 6px;background:#7a1818;border-bottom-color:#262626;}
+.secondary-navigation{margin-top:20px;padding:0 6px;border-bottom-color:#262626;}
 .secondary-navigation ul li a.selected,.secondary-navigation ul li a.selected:hover{background-color:#262626;}
-#sidebar h3{background:#91959D;color:#FFF;border-bottom:10px solid #000;}
+#sidebar h3{background:#91959D;color:#FFF;border-bottom:10px solid #262626;}
 #sidebar .notice{border:0;}
 #sidebar .notice p{font-size:0.9em;}
 #sidebar ul li a:link,#sidebar ul li a:visited{background:#FFF;border-bottom:1px solid #f0f0ee;text-decoration:none;}
