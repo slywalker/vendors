@@ -71,7 +71,7 @@ form label,form input,form textarea,form select{font-size:1.1em;padding:2px;marg
 form label.right{text-align:right;}
 form .checkbox,form .radio{vertical-align:text-bottom;}
 form .checkbox input,form .radio input{margin-right:5px;width:auto;}
-form .checkbox label,.form .radio label{display:inline;line-height:2;font-size:.9em;font-weight:normal;}
+form .checkbox label,form .radio label{display:inline;line-height:2;font-size:.9em;font-weight:normal;}
 form .select .checkbox{width:30%;float:left;}
 form select option{padding:0 .5em;}
 form label{display:block;padding-bottom:2px;font-size:1em;font-weight:bold;}
