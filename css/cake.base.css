@@ -96,5 +96,5 @@ ul.list li .item .avatar{float:left;margin:0 5px 5px 0;width:30px;height:30px;}
 #box .block h2{padding:10px 15px;margin:0;}
 #box .block .content{padding:10px 20px;}
 .box{width:47%;float:left;padding:5px;margin:2px;height:200px;overflow:hidden;}
-.box .left{float:left;}
+.box .left{float:left;margin-right:4px;}
 .box .item{margin-left:80px;}
