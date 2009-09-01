@@ -70,17 +70,17 @@ form .columns .right{float:right;}
 form label,form input,form textarea,form select{font-size:1.1em;padding:2px;margin:0;}
 form label.right{text-align:right;}
 form .checkbox,form .radio{vertical-align:text-bottom;}
-form .checkbox input,form .radio input{margin-right:5px;width:auto;}
-form .checkbox label,form .radio label{display:inline;line-height:2;font-size:.9em;font-weight:normal;}
+form .checkbox input,form .radio input{margin-right:2px;width:auto;}
+form .checkbox label,form .radio label{display:inline;line-height:2;font-size:.9em;font-weight:normal;padding-right:1.5em;}
 form .select .checkbox{width:30%;float:left;}
 form select option{padding:0 .5em;}
 form label{display:block;padding-bottom:2px;font-size:1em;font-weight:bold;}
 form input,form textarea{width:90%;border-width:1px;border-style:solid;}
 form input[type=submit],form input[type=button],.button{padding:4px 6px;font-size:1em;text-align:center;width:auto;}
 form fieldset{border:1px solid #ccc;padding:16px 20px;}
-form fieldset fieldset{margin-bottom:20px;margin-top:0;padding:16px 10px;}
+form fieldset fieldset{margin:0 0 20px 0;padding:8px 10px;}
 form fieldset fieldset div{clear:left;margin:0 20px;}
-form fieldset fieldset legend{background:inherit;font-size:1em;padding:10px;}
+form fieldset fieldset legend{background:inherit;font-size:1em;padding:4px;}
 form fieldset legend{font-size:1.4em;font-weight:bold;line-height:1.5;padding:4px;}
 form .submit{margin:6px 0;}
 /* lists */

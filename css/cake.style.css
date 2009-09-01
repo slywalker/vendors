@@ -50,6 +50,7 @@ table th a:hover,
 table th a:active{color:#FFF;}
 /* forms */
 form legend{color:#7A1818;}
+form fieldset fieldset legend{color:#222222;}
 form input,form select,form textarea,form .input{-moz-border-radius:4px;-webkit-border-radius:4px;}
 form input,form select,form textarea{background-color:#FFF;border:1px solid #99928F;}
 form .description{margin:0;font-style:italic;color:#8c8c8c;font-size:.9em;}
