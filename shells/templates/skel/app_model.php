@@ -16,6 +16,18 @@ class AppModel extends Model {
 		}
 		return call_user_func_array(array('parent', 'find'), $args);
 	}
+	
+	/* example
+	private function __findLatest($options) {
+		$default = array(
+			'conditions' => array('published' => true),
+			'order' => array('created' => 'desc'),
+			'limit' => 10,
+		);
+		$options = am($default, $options);
+		return parent::find('all', $options);
+	}
+	*/
 
 	//Validation message i18n
 	public function invalidate($field, $value = true){
