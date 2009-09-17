@@ -28,11 +28,5 @@ class AppModel extends Model {
 		return parent::find('all', $options);
 	}
 	*/
-
-	//Validation message i18n
-	public function invalidate($field, $value = true){
-		parent::invalidate($field, $value);
-		$this->validationErrors[$field] = __($value, true);
-	}
 }
 ?>
