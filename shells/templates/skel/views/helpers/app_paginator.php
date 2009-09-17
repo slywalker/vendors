@@ -30,7 +30,10 @@ class AppPaginatorHelper extends AppHelper {
 		if (empty($key)) {
 			$key = $this->Paginator->defaultModel().'.'.$title;
 			$title = preg_replace('/_id$/', '', $title);
-			$title = __(Inflector::humanize($title), true);
+			if (!class_exists('I18n')) {
+				App::import('Core', 'i18n');
+			}
+			$title = I18n::translate(Inflector::humanize($title));
 		}
 		$sortKey = $this->Paginator->sortKey();
 		$sortDir = $this->Paginator->sortDir();
