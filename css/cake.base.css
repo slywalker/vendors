@@ -57,7 +57,7 @@ table th.first{width:30px;}
 table th.last{width:200px;}
 table .checkbox{margin-left:10px;}
 table td{padding:10px;}
-table td.actions{white-space:nowrap;}
+table td.actions{white-space:nowrap;width:0;}
 table td.last{text-align:right;}
 /* forms */
 input.checkbox{margin:0;padding:0;}
