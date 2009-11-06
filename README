@@ -6,3 +6,8 @@ $ cake bake view [controllerName] list_index index
 
 ボックス形式のindexテンプレートの使用方法
 $ cake bake view [controllerName] box_index index
+
+Plugin内のBake
+$ cake bake controller -plugin [pluginName]
+$ cake bake model -plugin [pluginName]
+$ cake bake view -plugin [pluginName]
