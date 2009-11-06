@@ -58,6 +58,10 @@ class ControllerTask extends Shell {
  * @access public
  */
 	function initialize() {
+		if (!empty($this->params['plugin'])) {
+			$this->plugin = $this->params['plugin'];
+			$this->path = APP.'plugins'.DS.$this->plugin.DS.'controllers'.DS;
+		}
 	}
 /**
  * Execution method always used for tasks

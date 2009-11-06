@@ -54,6 +54,17 @@ class ModelTask extends Shell {
  */
 	var $tasks = array('DbConfig');
 /**
+ * Override initialize
+ *
+ * @access public
+ */
+	function initialize() {
+		if (!empty($this->params['plugin'])) {
+			$this->plugin = $this->params['plugin'];
+			$this->path = APP.'plugins'.DS.$this->plugin.DS.'models'.DS;
+		}
+	}
+/**
  * Execution method always used for tasks
  *
  * @access public
