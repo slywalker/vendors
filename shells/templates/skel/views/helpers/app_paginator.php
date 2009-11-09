@@ -3,7 +3,7 @@ class AppPaginatorHelper extends AppHelper {
 	public $helpers = array('Paginator');
 
 	// 表示件数の選択
-	function limit($currents = array(20, 50, 100), $format = null, $separator = '&nbsp;') {
+	public function limit($currents = array(20, 50, 100), $format = null, $separator = '&nbsp;') {
 		if (!$format) {
 			$format = __('Limit [ %currents% ]', true);
 		}
@@ -26,7 +26,7 @@ class AppPaginatorHelper extends AppHelper {
 	}
 
 	// 昇順・降順のとき矢印をつける
-	function sort($title, $key = null, $options = array()) {
+	public function sort($title, $key = null, $options = array()) {
 		if (empty($key)) {
 			$key = $this->Paginator->defaultModel().'.'.$title;
 			$title = preg_replace('/_id$/', '', $title);
@@ -34,6 +34,9 @@ class AppPaginatorHelper extends AppHelper {
 				App::import('Core', 'i18n');
 			}
 			$title = I18n::translate(Inflector::humanize($title));
+		}
+		if (false === strpos($key, '.')) {
+			$key = $this->Paginator->defaultModel().'.'.$key;
 		}
 		$sortKey = $this->Paginator->sortKey();
 		$sortDir = $this->Paginator->sortDir();
