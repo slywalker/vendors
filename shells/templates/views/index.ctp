@@ -1,3 +1,4 @@
+<?php echo "<?php $this->pageTitle = __('List {$pluralHumanName}', true);?>\n"?>
 <div id="main">
 	<?php echo "<?php echo \$form->create(null, array('action' => 'delete'));?>\n"?>
 	<div class="<?php echo $pluralVar;?> index">
@@ -18,7 +19,7 @@ echo "\t\t\t<?php\n";
 echo "\t\t\t\$th = array();\n";
 echo "\t\t\t\$th[] = __('Del', true);\n";
 foreach ($fields as $field) {
-	echo "\t\t\t\$th[] = \$appPaginator->sort('{$field}');\n";
+	echo "\t\t\t\$th[] = \$appPaginator->sort(__('".Inflector::humanize($field)."', true), '{$field}');\n";
 }
 echo "\t\t\t\$th[] = __('Actions', true);\n";
 echo "\t\t\techo \$html->tableHeaders(\$th);\n";

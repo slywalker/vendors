@@ -1,3 +1,4 @@
+<?php echo "<?php $this->pageTitle = __('".Inflector::humanize($action)." {$singularHumanName}', true);?>\n"?>
 <div id="main">
 	<div class="<?php echo $pluralVar;?> form">
 <?php
@@ -9,7 +10,7 @@ foreach ($fields as $field) {
 	if ($action == 'add' && $field == $primaryKey) {
 		continue;
 	} elseif (!in_array($field, array('created', 'modified', 'updated'))) {
-		echo "\t\t\t'{$field}',\n";
+		echo "\t\t\t'{$field}' => array('label' => __('".Inflector::humanize($field)."', true)),\n";
 	}
 }
 if (!empty($associations['hasAndBelongsToMany'])) {

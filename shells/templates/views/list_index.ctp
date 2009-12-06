@@ -1,3 +1,4 @@
+<?php echo "<?php $this->pageTitle = __('List {$pluralHumanName}', true);?>\n"?>
 <div id="main">
 	<?php echo "<?php echo \$form->create(null, array('action' => 'delete'));?>\n"?>
 	<div class="<?php echo $pluralVar;?> index">

@@ -1,3 +1,4 @@
+<?php echo "<?php $this->pageTitle = __('List {$singularHumanName}', true);?>\n"?>
 <div id="main">
 	<div class="<?php echo $pluralVar;?> view">
 		<h2><?php echo "<?php  __('{$singularHumanName}');?>";?></h2>
