@@ -272,9 +272,9 @@ class ControllerTask extends Shell {
 		$actions .= "\t\tif (!\$id) {\n";
 		if ($wannaUseSession) {
 			$actions .= "\t\t\t\$this->Session->setFlash(__('Invalid {$singularHumanName}', true));\n";
-			$actions .= "\t\t\t\$this->redirect(array('action'=>'index'));\n";
+			$actions .= "\t\t\t\$this->redirect(array('action' => 'index'));\n";
 		} else {
-			$actions .= "\t\t\t\$this->flash(__('Invalid {$singularHumanName}', true), array('action'=>'index'));\n";
+			$actions .= "\t\t\t\$this->flash(__('Invalid {$singularHumanName}', true), array('action' => 'index'));\n";
 		}
 		$actions .= "\t\t}\n";
 		$actions .= "\t\t\$this->set('".$singularName."', \$this->{$currentModelName}->read(null, \$id));\n";
@@ -289,9 +289,9 @@ class ControllerTask extends Shell {
 		$actions .= "\t\t\tif (\$this->{$currentModelName}->save(\$this->data)) {\n";
 		if ($wannaUseSession) {
 			$actions .= "\t\t\t\t\$this->Session->setFlash(__('The ".$singularHumanName." has been saved', true), 'default', array('class' => 'message success'));\n";
-			$actions .= "\t\t\t\t\$this->redirect(array('action'=>'index'));\n";
+			$actions .= "\t\t\t\t\$this->redirect(array('action' => 'index'));\n";
 		} else {
-			$actions .= "\t\t\t\t\$this->flash(__('{$currentModelName} saved.', true), array('action'=>'index'));\n";
+			$actions .= "\t\t\t\t\$this->flash(__('{$currentModelName} saved.', true), array('action' => 'index'));\n";
 		}
 		$actions .= "\t\t\t} else {\n";
 		if ($wannaUseSession) {
@@ -328,18 +328,18 @@ class ControllerTask extends Shell {
 		$actions .= "\t\tif (!\$id && !\$this->data) {\n";
 		if ($wannaUseSession) {
 			$actions .= "\t\t\t\$this->Session->setFlash(__('Invalid {$singularHumanName}', true));\n";
-			$actions .= "\t\t\t\$this->redirect(array('action'=>'index'));\n";
+			$actions .= "\t\t\t\$this->redirect(array('action' => 'index'));\n";
 		} else {
-			$actions .= "\t\t\t\$this->flash(__('Invalid {$singularHumanName}', true), array('action'=>'index'));\n";
+			$actions .= "\t\t\t\$this->flash(__('Invalid {$singularHumanName}', true), array('action' => 'index'));\n";
 		}
 		$actions .= "\t\t}\n";
 		$actions .= "\t\tif (\$this->data) {\n";
 		$actions .= "\t\t\tif (\$this->{$currentModelName}->save(\$this->data)) {\n";
 		if ($wannaUseSession) {
 			$actions .= "\t\t\t\t\$this->Session->setFlash(__('The ".$singularHumanName." has been saved', true), 'default', array('class' => 'message success'));\n";
-			$actions .= "\t\t\t\t\$this->redirect(array('action'=>'index'));\n";
+			$actions .= "\t\t\t\t\$this->redirect(array('action' => 'index'));\n";
 		} else {
-			$actions .= "\t\t\t\t\$this->flash(__('The ".$singularHumanName." has been saved.', true), array('action'=>'index'));\n";
+			$actions .= "\t\t\t\t\$this->flash(__('The ".$singularHumanName." has been saved.', true), array('action' => 'index'));\n";
 		}
 		$actions .= "\t\t\t} else {\n";
 		if ($wannaUseSession) {
@@ -379,7 +379,7 @@ class ControllerTask extends Shell {
 		if ($wannaUseSession) {
 			$actions .= "\t\t\t\t\t\$this->Session->setFlash(__('{$singularHumanName} deleted', true), 'default', array('class' => 'message success'));\n";
 		} else {
-			$actions .= "\t\t\t\t\t\$this->flash(__('{$singularHumanName} deleted', true), array('action'=>'index'));\n";
+			$actions .= "\t\t\t\t\t\$this->flash(__('{$singularHumanName} deleted', true), array('action' => 'index'));\n";
 		}
 		$actions .= "\t\t\t\t}\n";
 		$actions .= "\t\t\t}\n";
@@ -388,11 +388,11 @@ class ControllerTask extends Shell {
 		if ($wannaUseSession) {
 			$actions .= "\t\t\t\t\$this->Session->setFlash(__('{$singularHumanName} deleted', true), 'default', array('class' => 'message success'));\n";
 		} else {
-			$actions .= "\t\t\t\t\$this->flash(__('{$singularHumanName} deleted', true), array('action'=>'index'));\n";
+			$actions .= "\t\t\t\t\$this->flash(__('{$singularHumanName} deleted', true), array('action' => 'index'));\n";
 		}
 		$actions .= "\t\t\t}\n";
 		$actions .= "\t\t}\n";
-		$actions .= "\t\t\$this->redirect(array('action'=>'index'));\n";
+		$actions .= "\t\t\$this->redirect(array('action' => 'index'));\n";
 		$actions .= "\t}\n";
 		$actions .= "\n";
 		return $actions;
