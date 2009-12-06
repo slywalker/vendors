@@ -277,7 +277,7 @@ class ModelTask extends Shell {
 				if ($fieldName == 'email') {
 					$guess = $methods['email'];
 				} elseif ($field['type'] == 'string') {
-					$guess = $methods['notempty'];
+					$guess = $methods['notEmpty'];
 				} elseif ($field['type'] == 'integer') {
 					$guess = $methods['numeric'];
 				} elseif ($field['type'] == 'boolean') {
