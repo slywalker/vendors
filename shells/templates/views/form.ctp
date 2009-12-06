@@ -1,4 +1,4 @@
-<?php echo "<?php $this->pageTitle = __('".Inflector::humanize($action)." {$singularHumanName}', true);?>\n"?>
+<?php echo "<?php \$this->pageTitle = __('".Inflector::humanize($action)." {$singularHumanName}', true);?>\n"?>
 <div id="main">
 	<div class="<?php echo $pluralVar;?> form">
 <?php
