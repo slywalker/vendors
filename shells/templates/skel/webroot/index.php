@@ -1,5 +1,4 @@
 <?php
-/* SVN FILE: $Id: index.php 7805 2008-10-30 17:30:26Z AD7six $ */
 /**
  * Short description for file.
  *
@@ -7,29 +6,27 @@
  *
  * PHP versions 4 and 5
  *
- * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
- * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright 2005-2009, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @filesource
- * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
- * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @copyright     Copyright 2005-2009, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @package       cake
  * @subpackage    cake.app.webroot
  * @since         CakePHP(tm) v 0.2.9
- * @version       $Revision: 7805 $
- * @modifiedby    $LastChangedBy: AD7six $
- * @lastmodified  $Date: 2008-10-31 02:30:26 +0900 (Fri, 31 Oct 2008) $
- * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
+ * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
+
 /**
  * Use the DS to separate the directories in other defines
  */
 	if (!defined('DS')) {
 		define('DS', DIRECTORY_SEPARATOR);
 	}
+
 /**
  * These defines should only be edited if you have cake installed in
  * a directory layout other than the way it is distributed.
@@ -43,6 +40,7 @@
 	if (!defined('ROOT')) {
 		define('ROOT', dirname(dirname(dirname(__FILE__))));
 	}
+
 /**
  * The actual directory name for the "app".
  *
@@ -50,6 +48,7 @@
 	if (!defined('APP_DIR')) {
 		define('APP_DIR', basename(dirname(dirname(__FILE__))));
 	}
+
 /**
  * The absolute path to the "cake" directory, WITHOUT a trailing DS.
  *
@@ -85,7 +84,7 @@
 		return;
 	} else {
 		$Dispatcher = new Dispatcher();
-		$Dispatcher->dispatch($url);
+		$Dispatcher->dispatch();
 	}
 	if (Configure::read() > 0) {
 		echo "<!-- " . round(getMicrotime() - $TIME_START, 4) . "s -->";
