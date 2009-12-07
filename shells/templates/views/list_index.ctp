@@ -63,7 +63,7 @@ echo "\t\t\t?>\n";
 		</div>
 		<div class="clear"></div>
 	</div>
-	</form>
+<?php echo "\t<?php echo \$form->end();?>\n";?>
 </div>
 <div id="sidebar">
 	<div class="block">

@@ -55,7 +55,7 @@ echo "\t\t\t?>\n";
 	</div>
 	<div class="actions-bar">
 		<div class="actions">
-			<?php echo "<?php echo \$form->submit(__('Delete Selected', true), array('div' => false));?>\n"?>
+			<?php echo "<?php echo \$form->submit(__('Delete Selected', true), array('div' => false));?>\n";?>
 		</div>
 		<div class="pagination">
 			<?php echo "<?php echo \$paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>\n";?>
@@ -64,7 +64,7 @@ echo "\t\t\t?>\n";
 		</div>
 		<div class="clear"></div>
 	</div>
-	</form>
+<?php echo "\t<?php echo \$form->end();?>\n";?>
 </div>
 <div id="sidebar">
 	<div class="block">
